@@ -388,7 +388,6 @@ namespace VIDGS配置软件
                     if (la.Name == "Status")    //将状态变化保存在txt中
                     {
                         CShareData.OperateRecordStr += str + "\r\n";
-                        
                     }
                 }
             }
@@ -1445,7 +1444,7 @@ namespace VIDGS配置软件
         }
         #endregion
 
-                                                                #region 回零，置零
+        #region 回零，置零
         public bool ReturnZeroFunc(SerialPort serialPort1, Label Status, ProgressBar pBStatus)
         {
             ProgressBarUpdate(pBStatus, 0);
@@ -1511,7 +1510,7 @@ namespace VIDGS配置软件
 
         public bool SetZeroFunc(SerialPort serialPort1, Label Status, ProgressBar pBStatus)
         {
-            ProgressBarUpdate(pBStatus, 0);     
+            ProgressBarUpdate(pBStatus, 0);
             if (MoveFunc(CShareData.MoveDirection.None, 0, CShareData.SetZeroValue.Set, serialPort1, Status, null))
             {
                 ProgressBarUpdate(pBStatus, 100);
@@ -4152,7 +4151,7 @@ namespace VIDGS配置软件
             Int16 YStepSample = 10;  //对Q12采样的步数
             int YMoveTime = YMoveMaxStep / YStepSample; //每次扫描得到的点数 zzm 0725 change 65 to 129
             bool Q12Value = false;
-           if (!Susi4.APIs.SusiGPIO.Available) return false;
+            if (!Susi4.APIs.SusiGPIO.Available) return false;
             if (Q12Port == -1)
             {
                 Q12Port = Convert.ToInt32(Parameter.glb_Parameter.system_parameter["Q12Port"].InnerText);
@@ -4299,7 +4298,6 @@ namespace VIDGS配置软件
                 ProgressBarUpdate(pBStatus, 0);
                 LabelUpdate(Status, "请检查玻璃窗是否被遮挡！");
                 return false;
-                
             }
         }
 

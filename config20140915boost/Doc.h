@@ -92,10 +92,8 @@ typedef struct laser_machine_parameters{
 	int CatchDisMax;
 	int ObjectHighMin;
 	int ObjectHighMax;
-	int CarHighMax;
 	int ObjectDisMin;
 	int ObjectDisMax;
-	float WidthMaxRatio;
 	float WidthMeasureRatio;
 	int NeighborDifferMax;
 	int PlanePointNumberMin;
@@ -274,7 +272,6 @@ typedef struct laser_parameters{
 	float guide_line_b;
 	float guide_line_x;
 	float guide_line_y;
-	float offset_angle;
 }laser_parameters;
 
 typedef struct m_allnodedata{ 

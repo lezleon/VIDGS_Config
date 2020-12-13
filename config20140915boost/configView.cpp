@@ -2467,7 +2467,7 @@ void _stdcall transform1_2Struct_std(CLaster *p, needTransform1_2 *structDataCs,
 		structDataCs->guide_line_k = p->guide_line_k;
 		structDataCs->guide_line_b = p->guide_line_b;
 		structDataCs->guide_line_x = p->guide_line_x;
-		structDataCs->offset_angle = p->offset_angle;
+
 		structDataCs->x_walk = p->x_walk;//走步测试的位置，可以只上行
 		structDataCs->y_walk = p->y_walk;
 	}

@@ -4560,7 +4560,6 @@ private void Image_Save_Click(object sender, RoutedEventArgs e)
                         else
                         {
                             Block2.Text = "执行失败！";
-                            
                         }
                         _stopshine();
                     }), null);

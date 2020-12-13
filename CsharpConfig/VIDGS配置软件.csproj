@@ -106,7 +106,6 @@
     <Reference Include="Microsoft.Expression.Interactions">
       <HintPath>packages\Microsoft.Expression\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PvNET">
       <HintPath>packages\PvAPI\PvNET.dll</HintPath>
     </Reference>
@@ -315,7 +314,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
-    <Fakes Include="Fakes\MahApps.Metro.fakes" />
     <None Include="packages.config" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">

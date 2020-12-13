@@ -73,7 +73,6 @@ CLaster::CLaster(CWnd* pParent /*=NULL*/)
   refleshFlag4pointer = &refleshFlag4;
   guide_line_y = guide_line_x = 0;
   guide_line_k = guide_line_b = 0;
-  offset_angle=0;
   x_walk = y_walk = 0;
   countWalkSetCount = 0;
   //**********  boost ***********
@@ -94,7 +93,7 @@ CLaster::CLaster(CWnd* pParent /*=NULL*/)
   //else str_stop="stop"+linenum.str_stopnum;
 
   laser_machine_parameters lp = Doc.readlaserparamters(".\\test.xml");
-  Edit_x_Offset = offset_angle;
+  Edit_x_Offset = lp.HrzOffsetAngle;
   Edit_Start_x = -6.2 + Edit_x_Offset;
   Edit_End_x = 6.2 + Edit_x_Offset;
   Edit_Start_y = 0;
@@ -4421,7 +4420,7 @@ void CLaster::ScanYard() {
   else {
     Edit_StandHigh -= 4;
     stepMoveNoSet0(2, DOWN, VERTICAL);
-    Sleep(200);
+    Sleep(100);
     Scan_Cate = 0;
     refleshFlag1 = 2; *refleshFlag1pointer = 2;//站坪扫描：更新
   }
@@ -7130,7 +7129,6 @@ void CLaster::OnBnClickedButtonReadguideline() {
   guide_line_x = lp.guide_line_x;
   guide_line_y = lp.guide_line_y;
   object_dis = lp.object_dis;
-  offset_angle = lp.offset_angle;
 
   laser_machine_parameters lmp = Doc.readlaserparamters(".\\test.xml");
   install_high = lmp.install_high;
@@ -7358,11 +7356,6 @@ void CLaster::OnBnClickedButtonReadtype() {
     guide_line_x = lp.guide_line_x;
     guide_line_y = lp.guide_line_y;
     object_dis = lp.object_dis;
-	offset_angle = lp.offset_angle;
-	Edit_x_Offset = offset_angle;
-	Edit_Start_x = -6.2 + Edit_x_Offset;
-    Edit_End_x = 6.2 + Edit_x_Offset;
-
     laser_machine_parameters lmp = Doc.readlaserparamters(".\\test.xml");
     install_high = lmp.install_high;
     HrzConfirmSteps = lmp.HrzConfirmSteps;
@@ -7445,14 +7438,10 @@ void CLaster::OnBnClickedButtonReadlinenum() {
       guide_line_x = lp.guide_line_x;
       guide_line_y = lp.guide_line_y;
       install_high = lmp.install_high;
-	  offset_angle = lp.offset_angle;
       object_dis = lp.object_dis;
       HrzConfirmSteps = lmp.HrzConfirmSteps;
       VertConfirmSteps = lmp.VertConfirmSteps;
 
-	  Edit_x_Offset = offset_angle;
-	  Edit_Start_x = -6.2 + Edit_x_Offset;
-      Edit_End_x = 6.2 + Edit_x_Offset;
       if (guide_line_k != 0)
         guide_line_x = float(guide_line_y - guide_line_b) / guide_line_k;
 

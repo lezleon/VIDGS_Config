@@ -1215,7 +1215,6 @@ m_allnodedata Document::readalldata(string routename)
 			laserdata.guide_line_b = (float)vlpt[vlpiter]["guide_line_b"];
 			laserdata.guide_line_x = (float)vlpt[vlpiter]["guide_line_x"];
 			laserdata.guide_line_y = (float)vlpt[vlpiter]["guide_line_y"];
-			laserdata.offset_angle = (float)vlpt[vlpiter]["offset_angle"];
 			alldata.VLPs.push_back(laserdata);
 		}
 
@@ -1300,10 +1299,8 @@ m_allnodedata Document::readalldata(string routename)
 		alldata.L_M_datas.CatchDisMax = (int)t["CatchDisMax"];
 		alldata.L_M_datas.ObjectHighMin = (int)t["ObjectHighMin"];
 		alldata.L_M_datas.ObjectHighMax = (int)t["ObjectHighMax"];
-		alldata.L_M_datas.CarHighMax = (int)t["CarHighMax"];
 		alldata.L_M_datas.ObjectDisMin = (int)t["ObjectDisMin"];
 		alldata.L_M_datas.ObjectDisMax = (int)t["ObjectDisMax"];
-		alldata.L_M_datas.WidthMaxRatio = (float)t["WidthMaxRatio"];
 		alldata.L_M_datas.WidthMeasureRatio = (float)t["WidthMeasureRatio"];
 		alldata.L_M_datas.NeighborDifferMax = (int)t["NeighborDifferMax"];
 		alldata.L_M_datas.PlanePointNumberMin = (int)t["PlanePointNumberMin"];
@@ -1500,7 +1497,6 @@ m_allnodedata Document::readalldata(string routename)
 		laserdata.guide_line_b = (float)vlpt[vlpiter]["guide_line_b"];
 		laserdata.guide_line_x = (float)vlpt[vlpiter]["guide_line_x"];
 		laserdata.guide_line_y = (float)vlpt[vlpiter]["guide_line_y"];
-		laserdata.offset_angle = (float)vlpt[vlpiter]["offset_angle"];
 		alldata.VLPs.push_back(laserdata);
 	}
 
@@ -1585,10 +1581,8 @@ m_allnodedata Document::readalldata(string routename)
 	alldata.L_M_datas.CatchDisMax = (int)t["CatchDisMax"];
 	alldata.L_M_datas.ObjectHighMin = (int)t["ObjectHighMin"];
 	alldata.L_M_datas.ObjectHighMax = (int)t["ObjectHighMax"];
-	alldata.L_M_datas.CarHighMax = (int)t["CarHighMax"];
 	alldata.L_M_datas.ObjectDisMin = (int)t["ObjectDisMin"];
 	alldata.L_M_datas.ObjectDisMax = (int)t["ObjectDisMax"];
-	alldata.L_M_datas.WidthMaxRatio = (float)t["WidthMaxRatio"];
 	alldata.L_M_datas.WidthMeasureRatio = (float)t["WidthMeasureRatio"];
 	alldata.L_M_datas.NeighborDifferMax = (int)t["NeighborDifferMax"];
 	alldata.L_M_datas.PlanePointNumberMin = (int)t["PlanePointNumberMin"];
@@ -2512,8 +2506,7 @@ void Document::writealldata(string routename)
 			<<"guide_line_k"<<VLaserParameters.at(iter).guide_line_k
 			<<"guide_line_b"<<VLaserParameters.at(iter).guide_line_b
 			<<"guide_line_x"<<VLaserParameters.at(iter).guide_line_x
-			<<"guide_line_y"<<VLaserParameters.at(iter).guide_line_y
-			<<"offset_angle"<<VLaserParameters.at(iter).offset_angle;
+			<<"guide_line_y"<<VLaserParameters.at(iter).guide_line_y;
 		fsw<<"}";
 	}	
 	fsw << "]";
@@ -2598,10 +2591,8 @@ void Document::writealldata(string routename)
 		<<"CatchDisMax"<<L_M_Datas.CatchDisMax
 		<<"ObjectHighMin"<<L_M_Datas.ObjectHighMin
 		<<"ObjectHighMax"<<L_M_Datas.ObjectHighMax
-		<<"CarHighMax"<<L_M_Datas.CarHighMax
 		<<"ObjectDisMin"<<L_M_Datas.ObjectDisMin
 		<<"ObjectDisMax"<<L_M_Datas.ObjectDisMax
-		<<"WidthMaxRatio"<<L_M_Datas.WidthMaxRatio
 		<<"WidthMeasureRatio"<<L_M_Datas.WidthMeasureRatio
 		<<"NeighborDifferMax"<<L_M_Datas.NeighborDifferMax
 		<<"PlanePointNumberMin"<<L_M_Datas.PlanePointNumberMin
@@ -2752,7 +2743,6 @@ void  Document::VLaserdatas(string gl_sl_name,laser_parameters newlaserdatas)
 			VLaserParameters.at(it).guide_line_b = newlaserdatas.guide_line_b;
 			VLaserParameters.at(it).guide_line_x = newlaserdatas.guide_line_x;
 			VLaserParameters.at(it).guide_line_y = newlaserdatas.guide_line_y;
-			VLaserParameters.at(it).offset_angle = newlaserdatas.offset_angle;
 			break;
 		}
 	}
@@ -2811,7 +2801,6 @@ laser_parameters Document::readlaserdatas(string routename, string glname, strin
 				gl_sl_laserdatas.guide_line_b= (float)t[iter]["guide_line_b"];
 				gl_sl_laserdatas.guide_line_x = (float)t[iter]["guide_line_x"];
 				gl_sl_laserdatas.guide_line_y = (float)t[iter]["guide_line_y"];
-				gl_sl_laserdatas.offset_angle = (float)t[iter]["offset_angle"];
 				break;
 			}		
 		}
@@ -2837,7 +2826,6 @@ laser_parameters Document::readlaserdatas(string routename, string glname, strin
 			gl_sl_laserdatas.guide_line_b= (float)t[iter]["guide_line_b"];
 			gl_sl_laserdatas.guide_line_x = (float)t[iter]["guide_line_x"];
 			gl_sl_laserdatas.guide_line_y = (float)t[iter]["guide_line_y"];
-			gl_sl_laserdatas.offset_angle = (float)t[iter]["offset_angle"];
 			break;
 		}		
 	}
@@ -3064,10 +3052,8 @@ laser_machine_parameters Document::readlaserparamters(string routename)//读参数
 		l_m_datas.CatchDisMax = (int)t["CatchDisMax"];
 		l_m_datas.ObjectHighMin = (int)t["ObjectHighMin"];
 		l_m_datas.ObjectHighMax = (int)t["ObjectHighMax"];
-		l_m_datas.CarHighMax = (int)t["CarHighMax"];
 		l_m_datas.ObjectDisMin = (int)t["ObjectDisMin"];
 		l_m_datas.ObjectDisMax = (int)t["ObjectDisMax"];
-		l_m_datas.WidthMaxRatio = (float)t["WidthMaxRatio"];
 		l_m_datas.WidthMeasureRatio = (float)t["WidthMeasureRatio"];
 		l_m_datas.NeighborDifferMax = (int)t["NeighborDifferMax"];
 		l_m_datas.PlanePointNumberMin = (int)t["PlanePointNumberMin"];
@@ -3137,10 +3123,8 @@ laser_machine_parameters Document::readlaserparamters(string routename)//读参数
 	l_m_datas.CatchDisMax = (int)t["CatchDisMax"];
 	l_m_datas.ObjectHighMin = (int)t["ObjectHighMin"];
 	l_m_datas.ObjectHighMax = (int)t["ObjectHighMax"];
-	l_m_datas.CarHighMax = (int)t["CarHighMax"];
 	l_m_datas.ObjectDisMin = (int)t["ObjectDisMin"];
 	l_m_datas.ObjectDisMax = (int)t["ObjectDisMax"];
-	l_m_datas.WidthMaxRatio = (float)t["WidthMaxRatio"];
 	l_m_datas.WidthMeasureRatio = (float)t["WidthMeasureRatio"];
 	l_m_datas.NeighborDifferMax = (int)t["NeighborDifferMax"];
 	l_m_datas.PlanePointNumberMin = (int)t["PlanePointNumberMin"];

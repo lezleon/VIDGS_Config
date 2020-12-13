@@ -75,7 +75,6 @@ public:
 	float guide_line_k; //引导线直线方程y=kx+b;
 	float guide_line_b;
 	int guide_line_x;
-	float offset_angle;
 
 	int x_walk;//走步测试的位置，只上行
 	int y_walk;
@@ -172,7 +171,6 @@ public:
 	int object_width;
 	float guide_line_k; //***********************引导线直线方程y=kx+b;************
 	float guide_line_b;
-	float offset_angle;
 	float offsetforline;
 	int guide_line_y; //停止线到激光器零点坐标的垂直距离
 	int guide_line_x; //停止线到激光器零点坐标的水平距离
