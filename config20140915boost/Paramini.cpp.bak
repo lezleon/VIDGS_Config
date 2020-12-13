@@ -1,0 +1,126 @@
+#include "StdAfx.h"
+#include "Paramini.h"
+
+CParamini g_ParamIni;
+CString CParamini::g_strSection = _T("Fixerdetect");
+CString CParamini::g_strareawidth = _T("areawidth");
+CString CParamini::g_strareaheight = _T("areaheight");
+CString CParamini::g_str_shift_left_x = _T("shift_left_x");
+CString CParamini::g_str_shift_left_y = _T("shift_left_y");
+CString CParamini::g_str_shift_right_x = _T("shift_right_x");
+CString CParamini::g_str_shift_right_y = _T("shift_right_y");
+CString CParamini::g_str_shift_bottom_x = _T("shift_bottom_x");
+CString CParamini::g_str_shift_bottom_y = _T("shift_bottom_y");
+
+CString CParamini::g_str_search_rect_x = _T("search_rect_x");
+CString CParamini::g_str_search_rect_y = _T("search_rect_y");
+CString CParamini::g_str_search_rect_width = _T("search_rect_width");
+CString CParamini::g_str_search_rect_height = _T("search_rect_height");
+CString CParamini::g_str_center_template_x = _T("center_template_x");
+CString CParamini::g_str_center_template_y = _T("center_template_y");
+CString CParamini::g_str_locate_offset = _T("locate_offset_threshold");
+CString CParamini::g_str_Rect_Number_Seven = _T("Rect_Number_Seven");
+
+CString CParamini::g_str_shift_rect0_x = _T("shift_rect0_x");
+CString CParamini::g_str_shift_rect0_y = _T("shift_rect0_y");
+CString CParamini::g_str_shift_rect1_x = _T("shift_rect1_x");
+CString CParamini::g_str_shift_rect1_y = _T("shift_rect1_y");
+CString CParamini::g_str_shift_rect2_x = _T("shift_rect2_x");
+CString CParamini::g_str_shift_rect2_y = _T("shift_rect2_y");
+CString CParamini::g_str_shift_rect3_x = _T("shift_rect3_x");
+CString CParamini::g_str_shift_rect3_y = _T("shift_rect3_y");
+CString CParamini::g_str_shift_rect4_x = _T("shift_rect4_x");
+CString CParamini::g_str_shift_rect4_y = _T("shift_rect4_y");
+CString CParamini::g_str_shift_rect5_x = _T("shift_rect5_x");
+CString CParamini::g_str_shift_rect5_y = _T("shift_rect5_y");
+CString CParamini::g_str_shift_rect6_x = _T("shift_rect6_x");
+CString CParamini::g_str_shift_rect6_y = _T("shift_rect6_y");
+
+CString CParamini::g_str_rect0_width = _T("rect0_width");
+CString CParamini::g_str_rect0_height = _T("rect0_height");
+CString CParamini::g_str_rect1_width = _T("rect1_width");
+CString CParamini::g_str_rect1_height = _T("rect1_height");
+CString CParamini::g_str_rect2_width = _T("rect2_width");
+CString CParamini::g_str_rect2_height = _T("rect2_height");
+CString CParamini::g_str_rect3_width = _T("rect3_width");
+CString CParamini::g_str_rect3_height = _T("rect3_height");
+CString CParamini::g_str_rect4_width = _T("rect4_width");
+CString CParamini::g_str_rect4_height = _T("rect4_height");
+CString CParamini::g_str_rect5_width = _T("rect5_width");
+CString CParamini::g_str_rect5_height = _T("rect5_height");
+CString CParamini::g_str_rect6_width = _T("rect6_width");
+CString CParamini::g_str_rect6_height = _T("rect6_height");
+
+
+
+
+
+
+CString CParamini::g_str_miss_areawidth = _T("miss_areawidth");
+CString CParamini::g_str_miss_areaheight = _T("miss_areaheight");
+CString CParamini::g_str_miss_shift_left_x = _T("miss_shift_left_x");
+CString CParamini::g_str_miss_shift_left_y = _T("miss_shift_left_y");
+CString CParamini::g_str_miss_shift_right_x = _T("miss_shift_right_x");
+CString CParamini::g_str_miss_shift_right_y = _T("miss_shift_right_y");
+CString CParamini::g_str_FIX_minval_threshold = _T("FIX_minval_threshold");
+CString CParamini::g_str_FIX_miss_threshold=_T("FIX_miss_threshold");
+
+CString CParamini::g_strSection_BRD = _T("BRSdetect");
+CString CParamini::g_str_shift_top_x=_T("shift_top_x");
+CString CParamini::g_str_shift_top_y=_T("shift_top_y");
+CString CParamini::g_str_left_right_width=_T("left_right_width");
+CString CParamini::g_str_left_right_height=_T("left_right_height");
+CString CParamini::g_str_bottom_width=_T("bottom_width");
+CString CParamini::g_str_bottom_height=_T("bottom_height");
+CString CParamini::g_str_top_width=_T("top_width");
+CString CParamini::g_str_top_height=_T("top_height");
+CString CParamini::g_str_BRS_minval_threshold=_T("BRS_minval_threshold");
+CString CParamini::g_str_With_Locate=_T("With_Locate");
+
+CString CParamini::g_str_BRS_rect0_x = _T("BRS_rect0_x");
+CString CParamini::g_str_BRS_rect0_y = _T("BRS_rect0_y");
+CString CParamini::g_str_BRS_rect0_width = _T("BRS_rect0_width");
+CString CParamini::g_str_BRS_rect0_height = _T("BRS_rect0_height");
+CString CParamini::g_str_BRS_rect1_x = _T("BRS_rect1_x");
+CString CParamini::g_str_BRS_rect1_y = _T("BRS_rect1_y");
+CString CParamini::g_str_BRS_rect1_width = _T("BRS_rect1_width");
+CString CParamini::g_str_BRS_rect1_height = _T("BRS_rect1_height");
+CString CParamini::g_str_BRS_rect2_x = _T("BRS_rect2_x");
+CString CParamini::g_str_BRS_rect2_y = _T("BRS_rect2_y");
+CString CParamini::g_str_BRS_rect2_width = _T("BRS_rect2_width");
+CString CParamini::g_str_BRS_rect2_height = _T("BRS_rect2_height");
+CString CParamini::g_str_BRS_rect3_x = _T("BRS_rect3_x");
+CString CParamini::g_str_BRS_rect3_y = _T("BRS_rect3_y");
+CString CParamini::g_str_BRS_rect3_width = _T("BRS_rect3_width");
+CString CParamini::g_str_BRS_rect3_height = _T("BRS_rect3_height");
+
+
+
+CString CParamini::g_strSection_Railface=_T("Railfacedetect");
+CString CParamini::g_str_gate_Threshold=_T("gate_Threshold");
+CString CParamini::g_str_gate_Gray=_T("gate_Gray");
+CString CParamini::g_str_cvThreshold_gata=_T("cvThreshold_gata");
+CString CParamini::g_str_ROI_rect1_x=_T("ROI_rect1_x");
+CString CParamini::g_str_ROI_rect1_y=_T("ROI_rect1_y");
+CString CParamini::g_str_ROI_rect1_width=_T("ROI_rect1_width");
+CString CParamini::g_str_ROI_rect1_height=_T("ROI_rect1_height");
+CString CParamini::g_str_max_frame=_T("max_frame");
+CString CParamini::g_str_ration=_T("ration");
+
+
+CParamini::CParamini(void)
+{
+}
+
+CParamini::~CParamini(void)
+{
+}
+
+void CParamini::Init(CString filename)
+{
+	CString strFile = ::GetAppPath(AfxGetApp()->m_hInstance);
+	strFile +=filename;
+
+	SetPathName(strFile);
+
+}

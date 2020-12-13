@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="VIDGS配置软件.about"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="360" d:DesignWidth="450">
+    <UserControl.Resources>
+        <Style x:Key="Heading">
+            <Setter Property="Paragraph.FontSize" Value="30"></Setter>
+            <Setter Property="Paragraph.TextDecorations" Value="Underline"></Setter>
+            <Setter Property="Paragraph.TextAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="Subheading">
+            <Setter Property="Paragraph.FontWeight" Value="Bold"></Setter>
+            <Setter Property="Paragraph.TextAlignment" Value="Center"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="360"/>
+        </Grid.RowDefinitions>
+        <FlowDocumentReader HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch"  Margin="2,0,2,-28"  MinZoom="100" IsFindEnabled="False" IsPrintEnabled="True" IsTwoPageViewEnabled="False" MaxZoom="150" Background="#00FFFFFF">
+            <FlowDocument Background="LightYellow" IsOptimalParagraphEnabled="False">
+
+                <Paragraph Style="{StaticResource Heading}" >
+                    可视化智能飞机泊位引导系统
+                </Paragraph>
+                <Paragraph Margin="20,0,0,0" FontSize="16">
+                    VIDGS配置软件
+                </Paragraph>
+                <Paragraph Margin="20,10,0,0" FontSize="16" >
+                    版本:      1.0                    
+                </Paragraph>
+                <Paragraph  Margin="20,10,0,0"  FontSize="16">
+                    Copyright © 2016 CIMC. All rights reserved
+                </Paragraph>
+                <Paragraph  Margin="20,40,0,0"  FontSize="16">
+                    深圳中集天达空港设备有限公司
+                </Paragraph>
+                <Paragraph  Margin="20,10,0,0"  FontSize="16">
+                    地址：中国广东省深圳市宝安区福永福园二路九号
+                </Paragraph>
+                <Paragraph  Margin="20,10,0,0"  FontSize="16">
+                    网址：http://www.cimc.com/business/airport/
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentReader>
+        <Button Foreground="AliceBlue" Width="80" Height="40" Content="关闭" Click="CloseButton_Click" HorizontalAlignment="Center"  Margin="0,310,20,10" Background="#FF806E6E">
+        </Button>
+    </Grid>
+</UserControl>

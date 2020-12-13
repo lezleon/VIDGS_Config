@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="/CsharpConfig;component/DescriptionDictionary.xaml"/>
+		<ResourceDictionary Source="/CsharpConfig;component/Themes/Generic.xaml"/>
+		<ResourceDictionary Source="/CsharpConfig;component/MyResDic.xaml"/>
+		<ResourceDictionary Source="/CsharpConfig;component/Resources/Icons.xaml"/>
+		<ResourceDictionary Source="/CsharpConfig;component/Resources/StringResource.xaml"/>
+		<ResourceDictionary Source="/CsharpConfig;component/Resources/StringResource.zh-CN.xaml"/>
+		<ResourceDictionary Source="/CsharpConfig;component/Resources/CirButton.xaml"/>
+	</ResourceDictionary.MergedDictionaries>
+	<!-- 应该在此定义资源字典条目。-->
+</ResourceDictionary>

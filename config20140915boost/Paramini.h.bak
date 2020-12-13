@@ -1,0 +1,121 @@
+#pragma once
+#include "ini.h"
+
+class CParamini :
+	public CIni
+{
+public:
+	CParamini(void);
+	~CParamini(void);
+
+	virtual void Init(CString filename);
+public:
+	static CString 
+		g_strSection,
+		g_strareawidth,
+		g_strareaheight,
+		g_str_search_rect_x,
+		g_str_search_rect_y,
+		g_str_search_rect_width,
+		g_str_search_rect_height,
+		g_str_center_template_x,
+		g_str_center_template_y,
+		g_str_locate_offset,
+		g_str_Rect_Number_Seven,
+		g_str_shift_left_x,
+		g_str_shift_left_y,
+		g_str_shift_right_x,
+		g_str_shift_right_y,
+		g_str_shift_bottom_x,
+		g_str_shift_bottom_y,
+		g_str_miss_areawidth,
+		g_str_miss_areaheight,
+		g_str_miss_shift_left_x,
+		g_str_miss_shift_left_y,
+		g_str_miss_shift_right_x,
+		g_str_miss_shift_right_y,
+		g_str_FIX_minval_threshold,
+		g_str_FIX_miss_threshold;
+public:
+	static CString
+        g_strSection_BRD,
+		g_str_shift_top_x,
+        g_str_shift_top_y,
+		g_str_left_right_width,
+		g_str_left_right_height,
+        g_str_bottom_width,
+		g_str_bottom_height,
+		g_str_top_width,
+		g_str_top_height,
+		g_str_With_Locate,
+		g_str_BRS_minval_threshold;
+public:
+	static CString
+		g_str_BRS_rect0_x,
+		g_str_BRS_rect0_y,
+		g_str_BRS_rect0_width,
+		g_str_BRS_rect0_height,
+		g_str_BRS_rect1_x,
+		g_str_BRS_rect1_y,
+		g_str_BRS_rect1_width,
+		g_str_BRS_rect1_height,
+		g_str_BRS_rect2_x,
+		g_str_BRS_rect2_y,
+		g_str_BRS_rect2_width,
+		g_str_BRS_rect2_height,
+		g_str_BRS_rect3_x,
+		g_str_BRS_rect3_y,
+		g_str_BRS_rect3_width,
+		g_str_BRS_rect3_height;
+
+public:
+	static CString
+		g_strSection_Railface,
+		g_str_gate_Threshold,
+		g_str_gate_Gray,
+		g_str_cvThreshold_gata,
+		g_str_ROI_rect1_x,
+		g_str_ROI_rect1_y,
+		g_str_ROI_rect1_width,
+		g_str_ROI_rect1_height,
+	    g_str_max_frame,
+		g_str_ration;
+public:
+	static CString
+		g_str_shift_rect0_x,
+		g_str_shift_rect0_y,
+		g_str_shift_rect1_x,
+		g_str_shift_rect1_y,
+		g_str_shift_rect2_x,
+		g_str_shift_rect2_y,
+		g_str_shift_rect3_x,
+		g_str_shift_rect3_y,
+		g_str_shift_rect4_x,
+		g_str_shift_rect4_y,
+		g_str_shift_rect5_x,
+		g_str_shift_rect5_y,
+		g_str_shift_rect6_x,
+		g_str_shift_rect6_y;
+public:
+	static CString
+		g_str_rect0_width,
+		g_str_rect0_height,
+		g_str_rect1_width,
+		g_str_rect1_height,
+		g_str_rect2_width,
+		g_str_rect2_height,
+		g_str_rect3_width,
+		g_str_rect3_height,
+		g_str_rect4_width,
+		g_str_rect4_height,
+		g_str_rect5_width,
+		g_str_rect5_height,
+		g_str_rect6_width,
+		g_str_rect6_height;
+
+		
+
+};
+
+extern CParamini g_ParamIni;
+

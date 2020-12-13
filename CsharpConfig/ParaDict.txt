@@ -1,0 +1,153 @@
+StationNumber	站坪编号	3-4位数字，例如248,1001
+ServerAddress	上位机IP地址	上位机的IP地址，格式为XXX.XXX.XXX.XXX。
+ServerPort	上位机端口	上位机端口，请按照上位机程序开放的端口进行设置。
+LogSaveRoot	记录存储根目录	本地记录保存的目录，默认为D:/log/
+LEDCOM	LED端口	LED使用的COM口，默认值：COM2
+LEDPAUD	LED波特率	LED使用的波特率，默认值：115200	false
+MODBUSCOM	MODBUS端口	MODBUS使用的端口，默认值：COM4
+MODBUSPAUD	MODBUS波特率	MODBUS使用的波特率，默认值：115200	false
+LASERCOM	激光控制卡端口	激光控制卡使用的端口，默认值：COM1
+LASERPAUD	激光控制卡波特率	激光控制卡使用的波特率，默认值：115200	false
+DIPCOM	倾角检测器端口	倾角检测器使用的端口，默认值：COM3
+DIPPAUD	倾角检测器波特率	倾角检测器使用的波特率，默认值：9600	false
+DriftDistance	偏移提示	偏离信号提示距离，单位：米
+DriftRemove	偏移提示移除	偏离信号移除距离，单位：米
+OverSpeed24	24米外超速	24米外超速信号提示速度，单位：米/秒
+OverSpeed24Remove	24米外超速移除	24米外超速信号移除速度，单位：米/秒
+OverSpeed	24米内超速	24米内超速信号提示速度，单位：米/秒
+OverSpeedRemove	24米内超速移除	24米内超速信号移除速度，单位：米/秒
+ValidateDistance	最近机型验证距离	在此距离上，强制机型验证结束并给出结果，单位：米
+DriftWeightStart	初始偏移权重	30米处激光系统给出的偏移占融合信息的权重
+DriftWeightEnd	0米处偏移权重	0米处激光系统给出的偏移占融合信息的权重
+DistanceWeightStart	初始距离权重	30米处激光系统给出的距离占融合信息的权重
+DistanceWeightEnd	0米处距离权重	0米处激光系统给出的距离占融合信息的权重
+SpeedWeightStart	初始速度权重	30米处激光系统给出的速度占融合信息的权重
+SpeedWeightEnd	0米处速度权重	0米处激光系统给出的速度占融合信息的权重
+DriftGain	偏移增益	用于修正最终解算的偏移距离，单位：米
+DistanceGain	距离增益	用于修正最终解算的飞机到停止线的距离，单位:米
+MaxStopDistance	最大停止距离	当机轮距停止线在该距离之内时，可以给出引导成功信号，单位：米
+TooFarDistance	超出距离	当机轮超出停止线该距离值时，报出超出引导线的警告，单位：米
+MaxSpeed	最高限速	飞机速度达到多少时显示STOP TOO FAST并停止引导，单位:米/秒
+MaxSpeedRemove	最高限速移除	显示STOP TOO FAST后，飞机降速至多少时恢复引导，单位：米/秒
+SpeedSmoothWindow	速度平滑窗宽度		false
+SubsystemErrorTime	子系统故障时间	激光和视觉子系统多久未相应则判定为故障，单位：秒 false
+SystemSleepTime	系统启动最长时间	启动任务后多久未检测到飞机则停止任务，单位：分钟
+LEDDelayTime	LED延迟时间		false
+ModbusDelayTime	MODBUS延迟时间		false
+BoardInterlockPort	登机桥互锁信号接口	请填写数字并口上相应的接口编号，默认值：14
+EmergencyStopPort	急停信号接口	请填写数字并口上相应的接口编号，默认值：15
+StopDisplayTime	OK与Too Far持续显示时间	LED屏上OK信号与Too Far信号的显示时间，单位：秒，最大值120
+ChockOnDisplayTime	轮挡信号持续显示时间	LED屏上CHOCK ON信号显示时间，单位：秒，最大值120
+StopToOKTime	STOP到OK的时间	LED屏上STOP信号显示时间，该时间内飞机不滑动过远则判定引导结束，给出OK信号，单位：秒
+PBBAllow	是否使用登机桥连锁信号	1为使用，0为不使用
+PCAAllow	是否使用PCA飞机空调连锁	1为使用，0为不使用
+PCAPort	PCA飞机空调连锁接口号	请填写数字并口上相应的接口编号
+FGPAllow	是否使用FGP 400Hz连锁	1为使用，0为不使用
+FGPPort	FGP 400Hz连锁接口号	请填写数字并口上相应的接口编号
+Q12Port	Q12距离传感器接口号	请填写数字并口上相应的接口编号
+UPSPort	UPS接口号	请填写数字并口上相应的接口编号
+LEDERRPort	LED错误接口号	请填写数字并口上相应的接口编号
+LEDCOMERRPort	LED通信错误接口号	请填写数字并口上相应的接口编号
+BlackestJudgeStart	极黑区域分割阈值起始	搜索引擎时所用极黑区域分割阈值的起始灰度值。	false
+BlackestJudgeStep	极黑区域分割阈值步长	搜索引擎时所用极黑区域分割阈值的灰度值步长。	false
+CircleJudgeStart	圆形判别因子起始	搜索引擎时所用圆形最大半径与最小半径之比。	false
+CircleJudgeStep	圆形判别因子步长		false
+maxIterTimes	最大迭代次数		false
+MinEngineRadius	最小引擎半径（像素）	极黑区域判定为引擎时的最小半径。	false
+MinEnginePerimeter	最小引擎周长（像素）	极黑区域判定为引擎时的最小周长。	false
+MinTemplateScale	最小模板尺度	前轮模板的最小尺度。	false
+MaxTemplateScale	最大模板尺度	前轮模板的最大尺度。	false
+MinMatchRate	最小匹配度	前轮匹配时的最小匹配度。	false
+WheelDetectParamX	前轮区域宽度/引擎半径	前轮搜索区域宽度与引擎半径之比。	false
+WheelDetectParamY	前轮区域高度/引擎半径	前轮搜索区域高度与引擎半径之比。	false
+OriginalScale	前轮高度/引擎半径	前轮高度与引擎半径之比（中位值）。	false
+MaxOffset	前轮最大偏移量	前轮位置与引擎中心的垂直距离与引擎半径之比的最大值。	false
+install_high	安装高度	设备安装高度，单位：毫米
+HrzConfirmSteps	水平标定步数	激光零点与右边框相差的步数，程序自动设定，无需手动修改。	false
+VertConfirmSteps	垂直标定步数	激光零点与下边框相差的步数，程序自动设定，无需手动修改。	false
+HrzOffsetAngle	水平扫描角度偏移	水平扫描中心位置与真实零点的偏差值，单位：度，最大值15
+HrzConfirmProbability	水平边框激光概率	右边框步数判定概率，程序自动设定，无需手动修改。	false
+VertConfirmProbability	垂直边框激光概率	下边框步数判定概率，程序自动设定，无需手动修改。	false
+VerifyPlaneType	激光模块是否进行机型验证	1为是,0为否
+VerifyEngine	是否验证引擎	1为是,0为否
+NeedYardScan	是否进行站坪扫描	1为是,0为否
+CheckLaserEngine	激光模块是否检测引擎位置	1为是,0为否
+UseLeftEngine	激光模块扫描左引擎或右引擎	0为左引擎,1为右引擎
+CheckLaserHeight	激光模块是否检测机头高度	1为是,0为否
+CheckVisionEngineNum	视觉模块是否检测引擎个数	1为是,0为否
+CheckVisionEngineGap	视觉模块是否检测引擎间距	1为是,0为否
+DiskSpaceAlarm	磁盘空间报警阈值	剩余磁盘空间与总空间的最小比值,低于该值将报警并提示清理空间
+TaskMode	任务启动模式	1为全自动模式,上位机下达机型及时间,提前10分钟自动启动任务;2为半自动模式,上位机下达机型及时间,由地面操作人员手动开启任务;3为全手动模式,由地面操作人员在操控面板上选择机型并启动任务。
+SaveKeyImage	是否存储关键事件的图像	1为是，0为否
+RightLeftEngine	验证右引擎或者左引擎	0为右引擎，1为左引擎
+AccurateGuideDis	精确引导距离	单位：mm	false
+yard_scan_range	站坪扫描范围	请填写：1，2，3，4，5。1为±6度，2为±12度，3为±18度，4为±24度，5为±30度
+VerifyHeadHighDis	机型高度验证距离	单位：mm。距离停止线此距离开始验证机头高度的距离	false
+VerifyHeadHighMin	机头高度验证容差	单位：mm。机鼻高度的检测值与理论值的容差极限
+VerifyHeadHighMax	验证机头高度的最大值
+VerifyEngineDis	机型验证扫描引擎的距离	单位：mm。距离停止线此距离开始验证引擎位置	false
+EngineHeadDisMin	引擎机身机身间距阈值	单位：mm。用于区分机型，对于引擎位于尾部的单引擎和双引擎机型不做验证。	false
+VerifyEngineWidthMin	验证引擎宽度误差的阈值
+VerifyEngineWidthMax	验证引擎宽度最大值
+VerifyEngineCabinDisMin	引擎水平位置验证容差	单位：mm。引擎中心与机身距离的检测值与理论值的容差极限
+VerifyEngineCabinDisMax	验证引擎与机舱距离
+VerifyEngineHeadDisMin	引擎纵向位置验证容差	单位：mm。引擎前端至机鼻距离的检测值与理论值的容差极限
+VerifyEngineHeadDisMax	验证引擎与机头距离
+ScanEngineTimes	引擎扫描行数	机型验证中对理论引擎位置扫描的垂直跨度
+NeedShieldObscur	是否开启屏蔽遮挡	0为不开启，1为开启
+X_Obscur_Left	屏蔽遮挡左侧水平起始距离	单位：mm。引导过程中，左侧横向大于此距离的数据启用屏蔽遮挡
+X_Obscur_Right	屏蔽遮挡右侧水平起始距离	单位：mm。引导过程中，右侧横向大于此距离的数据启用屏蔽遮挡
+Y_Obscur	屏蔽遮挡纵向起始距离	单位：mm。引导过程中，纵向大于此距离的数据启用屏蔽遮挡
+PlaneLeaveHighMin	离港检测最低扫描高度	单位：mm。离港检测时扫描的最低的飞机的高度
+PlaneLeaveHighMax	离港检测最高扫描高度	单位：mm。离港检测时扫描的最高的飞机的高度
+PlaneLeaveYMin	离港检测最近扫描距离	单位：mm。离港检测时飞机超过停止线此距离值之内时认为飞机没有离港
+PlaneLeaveYMax	离港检测最远扫描距离	单位：mm。离港检测时飞机未到停止线此距离值之内时认为飞机没有离港
+PlaneLeaveZMin	离港检测最低飞机高度	单位：mm。离港检测时飞机要高于此高度
+PlaneLeaveConfirmPoint	离港检测确认点数
+PlaneLeaveConfirmLine	离港检测确认行数
+RegularVertical	例行垂直扫描是否可用
+RegularVerticalTime	例行垂直扫描的时间间隔
+yard_scan_obstacle_high	站坪扫描障碍物的最小高度	单位：mm。超过此值即判定可能为障碍物	false
+yard_scan_obstacle_width	站坪扫描障碍物的最小宽度	可发现成为障碍物的最小连续扫描点数。	false
+TowContinu	确认引擎边框时是否需要验证两个连续点
+SuspectMode	疑似捕获模式是否可用
+SuspectHotMax	疑似捕获热度允许最大值
+SuspectRowMin	疑似捕获要求连续列数
+SuspectSMNumberMin	疑似捕获至少需要的Sm点数
+MaxDistance	可以扫描的最大距离
+CatchDisMin	捕获范围最小值
+CatchDisMax	捕获范围最大值
+ObjectHighMin	目标高度最小阈值
+ObjectHighMax	目标高度最大阈值
+ObjectDisMin	目标距离最小阈值
+ObjectDisMax	目标距离最大阈值
+WidthMeasureRatio	宽度测量比例
+NeighborDifferMax	相邻感兴趣点最大差距
+PlanePointNumberMin	确认离港飞机最小点数		false
+BirdgePointNumberMin	确认登机桥点数	至少有2个点靠近引导线，则认为此行数据有登机桥	false
+MaxGap	允许缺口最大点数
+AlwayMoveMax	己字扫描后连续移动的最大次数
+OfflineSimulaMode	离线数据模拟成真实数据的模式
+SaveDataWhenOffline	离线测试中是否保存数据文件
+OfflineSleepTime	离线测试sleep时间
+CheckLeaveMode	飞机离港检测模式	1号模式为在预计离港时间后每间隔一定时间(由飞机离港检测间隔选项设置)自动检查飞机是否离港；2为通过登机桥连锁信号辅助确定模式，在登机桥到达泊桥位后才开始飞机离港检测；3为手动模式，只以地面操作人员在操控面板上点击PARK OFF为准。
+CheckLeaveTime	飞机离港检测间隔	相邻两次飞机离港检测的间隔时间，单位：分钟
+MaxAngleShakeX	X轴倾角最大抖动	箱体左右(倾斜)抖动的最大值,超过此值即报警,设备暂停使用,单位:度
+MaxAngleShakeY	Y轴倾角最大抖动	箱体前后(俯仰)抖动的最大值,超过此值即报警,设备暂停使用,单位:度
+MaxAngleBiasX	X轴倾角最大偏移	若设备启动时左右(倾斜)角超过此值即报警,设备暂停使用,单位:度
+MaxAngleBiasY	Y轴倾角最大偏移	若设备启动时前后(俯仰)角超过此值即报警,设备暂停使用,单位:度
+LaserForwardOffset	激光正向数据点偏移	激光正向数据开头需要移除的点数
+LaserBackwardOffset	激光反向数据点偏移	激光反向数据开头需要移除的点数
+Q12Steps	Q12距离传感器步数	Q12距离传感器对应的垂直镜步数与地面30米处对应的垂直镜步数之差	false
+RunningMode	运行模式	"Debug"：调试模式；"Normal"：正常模式。
+AutoSleepTime	自动休眠时间	在启动引导任务后，若在该时间内未捕获到飞机，则系统进入休眠状态，单位：分钟。
+LogPreserveDays	日志存留时间	系统日志保留时间，单位：天。若该值小于0，则不进行日志清理。
+MinDriftDistance	最小偏移报警距离	LED给出偏移报警的最小距离，小于该距离则不再提示偏移。默认值为1，单位：米。
+SlowDistance	显示"SLOW"的距离	距离小于该值时，LED屏上显示"SLOW"。默认值为2，单位：米。
+AccuracyGuideDistance	精确引导距离	距离小于该值时，LED屏上显示距离数值。默认值为16，单位：米。
+MaxReportDistance	最大报告距离	视觉系统测量距离小于该值时，将距离和偏移报告至融合模块。默认值为60，单位：米。
+GuideLineWidth	引导线宽度	引导线的实际宽度。单位：米。
+RestartInterval	重启时间间隔	系统自动重启间隔，单位：天。
+RestartTime	重启时间	系统自动重启时间，24小时制。
+WalkTestDistance	走步测试距离	走步测试起始扫描距离，单位：mm
+Y_Obscur_end	屏蔽遮挡最远距离	单位：mm。引导过程中，纵向大于此距离的数据启用屏蔽遮挡

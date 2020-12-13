@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="FontStatic">
+      <UniqueIdentifier>{c86a1e32-8c36-417a-9982-2236f12f4460}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Digistatic">
+      <UniqueIdentifier>{8d04bbd0-b19b-45a4-b7a4-46ffa882d2dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ButtonST">
+      <UniqueIdentifier>{1c558203-37c0-43f8-a83b-bafcd3f3d858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Ini">
+      <UniqueIdentifier>{3b2d7236-59f6-418a-90ce-bbca5414758b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="config.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="configDoc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="configView.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MainFrm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="FontStatic\FontStatic.cpp">
+      <Filter>FontStatic</Filter>
+    </ClCompile>
+    <ClCompile Include="Digistatic\Curvefit.cpp">
+      <Filter>Digistatic</Filter>
+    </ClCompile>
+    <ClCompile Include="Digistatic\Digistatic.cpp">
+      <Filter>Digistatic</Filter>
+    </ClCompile>
+    <ClCompile Include="Digistatic\DigiUtil.cpp">
+      <Filter>Digistatic</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonST\BtnST.cpp">
+      <Filter>ButtonST</Filter>
+    </ClCompile>
+    <ClCompile Include="Ini.cpp">
+      <Filter>Ini</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneType.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TypeChoose.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="StationNum.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="GuideLineNum.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Laster.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mscomm1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LineNum.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PointNum.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraOperate.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Doc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Paramini.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ChoosePoint.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneData.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="DLG_SETTING.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="LED.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TCPIPclient.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="configDoc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="configView.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MainFrm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="FontStatic\FontStatic.h">
+      <Filter>FontStatic</Filter>
+    </ClInclude>
+    <ClInclude Include="Digistatic\Curvefit.h">
+      <Filter>Digistatic</Filter>
+    </ClInclude>
+    <ClInclude Include="Digistatic\Digistatic.h">
+      <Filter>Digistatic</Filter>
+    </ClInclude>
+    <ClInclude Include="Digistatic\DigiUtil.h">
+      <Filter>Digistatic</Filter>
+    </ClInclude>
+    <ClInclude Include="Digistatic\Rgbcolor.h">
+      <Filter>Digistatic</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonST\BtnST.h">
+      <Filter>ButtonST</Filter>
+    </ClInclude>
+    <ClInclude Include="Ini.h">
+      <Filter>Ini</Filter>
+    </ClInclude>
+    <ClInclude Include="CXMemDC.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneType.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TypeChoose.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StationNum.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="GuideLineNum.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Laster.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="mscomm1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LineNum.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PointNum.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraOperate.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Doc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Paramini.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ChoosePoint.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneData.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DLG_SETTING.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BoostInclude.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="VIDGS_serial.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="LED.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TCPIPclient.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\config.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\config.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\configDoc.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="config.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

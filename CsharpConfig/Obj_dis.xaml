@@ -1,0 +1,58 @@
+﻿<Window x:Class="CsharpConfig.Obj_dis"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Height="300" Width="300"
+        Loaded="MWindow_Loaded"
+        AllowsTransparency="True" Background="Transparent"
+        WindowStyle="None" ResizeMode="CanResizeWithGrip">
+    <Border Width="Auto" Height="Auto" Name="windowFrame"
+    
+          BorderBrush="#395984"
+          BorderThickness="1"
+          CornerRadius="0,20,30,40" >
+        <Border.Background>
+            <LinearGradientBrush >
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="#E7EBF7" Offset="0.0"/>
+                        <GradientStop Color="#CEE3FF" Offset="0.5"/>
+
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="设置捕获距离" Margin="1" Padding="5" MouseLeftButtonDown="titleBar_MouseLeftButtonDown"></TextBlock>
+            <TextBlock x:Name="ForGuidelineDependency" Text="{DynamicResource Guideline6}" Margin="1" Padding="5" Visibility="Collapsed"></TextBlock>
+            <Grid Background="#B5CBEF" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="5,5,182,0" Height="57" VerticalAlignment="Top" TextWrapping="WrapWithOverflow">
+                    输入激光捕获距离  (单位毫米)
+                </TextBlock>
+                <TextBox x:Name="Obj_dis_Textbox" Margin="121,5,5,0" Height="57" VerticalAlignment="Top" KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged">
+                </TextBox>
+                <Button VerticalAlignment="Top"  HorizontalAlignment="Center" Padding="10" Grid.Row="1" Margin="152,0,77,0" Width="69" Click="Obj_dis_Cancel">关闭</Button>
+                <Button VerticalAlignment="Top"  HorizontalAlignment="Center" Padding="10" Grid.Row="1" Margin="68,0,164,0" Width="66" Click="Obj_dis_Confirm">确定</Button>
+            </Grid>
+
+            <TextBlock HorizontalAlignment="Center" Grid.Row="2" Text="Footer" Margin="1,10,1,1" Padding="5"></TextBlock>
+
+            <Rectangle Grid.RowSpan="3"
+       Cursor="SizeWE" Fill="Transparent" Width="5" VerticalAlignment="Stretch" HorizontalAlignment="Right"
+                 MouseLeftButtonDown="window_initiateWiden"
+                 MouseLeftButtonUp="window_endWiden"
+                 MouseMove="window_Widen"></Rectangle>
+
+        </Grid>
+    </Border>
+</Window>

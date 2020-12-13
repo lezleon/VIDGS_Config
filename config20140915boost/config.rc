@@ -1,0 +1,829 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)\r\n"
+    "LANGUAGE 4, 2\r\n"
+    "#pragma code_page(936)\r\n"
+    "#include ""res\\config.rc2""  // 非 Microsoft Visual C++ 编辑的资源\r\n"
+    "#include ""l.CHS\\afxres.rc""          // 标准组件\r\n"
+    "#include ""l.CHS\\afxprint.rc""        // 打印/打印预览资源\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\config.ico"
+IDR_configTYPE          ICON                    "res\\configDoc.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS
+BEGIN
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY 
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 170, 62
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "关于 config"
+FONT 9, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,14,14,21,20
+    LTEXT           "config, Version 1.0",IDC_STATIC,42,14,114,8,SS_NOPREFIX
+    LTEXT           "Copyright (C) 2012",IDC_STATIC,42,26,114,8
+    DEFPUSHBUTTON   "确定",IDOK,113,41,50,14,WS_GROUP
+END
+
+IDD_DLG_CheckPanel DIALOGEX 0, 0, 67, 348
+STYLE DS_SETFONT | WS_CHILD | WS_BORDER
+FONT 10, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "退出程序",IDC_BTN_EXIT,3,325,61,19,BS_FLAT
+    PUSHBUTTON      "打开图像",IDC_BTN_OPENIMAGE,3,14,61,6,BS_FLAT | NOT WS_VISIBLE
+    PUSHBUTTON      "绘制选框",IDC_BTN_DrawSelRect,3,111,61,19,BS_FLAT
+    PUSHBUTTON      "删除选框",IDC_BTN_DelSelRect,3,133,61,19,BS_FLAT
+    PUSHBUTTON      "确认捕获区域",IDC_CaptureRect,3,155,61,19,BS_FLAT
+    PUSHBUTTON      "绘制线条",IDC_DrawLine,3,1,61,19,BS_FLAT
+    PUSHBUTTON      "确认引导线",IDC_LineConfirm,3,45,61,19,BS_FLAT
+    PUSHBUTTON      "确认跟踪定位区",IDC_Track,3,177,61,19,BS_FLAT
+    PUSHBUTTON      "删除线条",IDC_DelLine,3,23,61,19,BS_FLAT
+    PUSHBUTTON      "确认停止线",IDC_StopLine,3,67,61,19,BS_FLAT
+    PUSHBUTTON      "确认登机桥位置",IDC_Bridge,3,199,61,19,BS_FLAT
+    PUSHBUTTON      "机型设置",IDC_PlaneType,3,89,61,19,BS_FLAT
+    PUSHBUTTON      "确认标记点",IDC_DrawPoint,3,304,61,19,BS_FLAT
+    PUSHBUTTON      "删除标记点",IDC_DelPoint,3,283,61,19,BS_FLAT
+    PUSHBUTTON      "插入标记点",IDC_PointConfim,3,262,61,19,BS_FLAT
+    PUSHBUTTON      "放大",IDC_Enlarge,3,220,61,19,BS_FLAT
+    PUSHBUTTON      "缩小",IDC_Shrink,3,241,61,19,BS_FLAT
+END
+
+IDD_PlaneType DIALOGEX 0, 0, 228, 190
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "机型设置"
+FONT 9, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,36,166,39,14
+    PUSHBUTTON      "取消",IDCANCEL,152,166,37,14
+    DEFPUSHBUTTON   "确定",IDOK2,36,166,39,14
+    COMBOBOX        IDC_COMBO1,56,8,48,110,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "引导线编号",IDC_STATIC,8,7,44,11
+    LTEXT           "停止线编号",IDC_STATIC,112,7,44,11
+    COMBOBOX        IDC_COMBO2,163,8,48,110,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "机型1",IDC_STATIC,8,25,33,12
+    EDITTEXT        IDC_type1,56,23,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型2",IDC_STATIC,8,42,33,12
+    EDITTEXT        IDC_type2,56,40,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型3",IDC_STATIC,8,59,33,12
+    EDITTEXT        IDC_type3,56,57,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型4",IDC_STATIC,8,76,33,12
+    EDITTEXT        IDC_type4,56,74,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型5",IDC_STATIC,8,93,33,12
+    EDITTEXT        IDC_type5,56,91,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型6",IDC_STATIC,8,110,33,12
+    EDITTEXT        IDC_type6,56,108,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型7",IDC_STATIC,8,127,33,12
+    EDITTEXT        IDC_type7,56,125,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型8",IDC_STATIC,8,144,33,12
+    EDITTEXT        IDC_type8,56,142,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型9",IDC_STATIC,113,23,33,12
+    EDITTEXT        IDC_type9,163,22,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型10",IDC_STATIC,113,40,33,12
+    EDITTEXT        IDC_type10,163,39,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型11",IDC_STATIC,113,57,33,12
+    EDITTEXT        IDC_type11,163,56,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型12",IDC_STATIC,113,74,33,12
+    EDITTEXT        IDC_type12,163,73,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型13",IDC_STATIC,113,91,33,12
+    EDITTEXT        IDC_type13,163,90,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型14",IDC_STATIC,113,108,33,12
+    EDITTEXT        IDC_type14,163,107,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型15",IDC_STATIC,113,125,33,12
+    EDITTEXT        IDC_type15,163,124,47,14,ES_AUTOHSCROLL
+    LTEXT           "机型16",IDC_STATIC,113,142,33,12
+    EDITTEXT        IDC_type16,163,141,47,14,ES_AUTOHSCROLL
+END
+
+IDD_TYPE DIALOGEX 0, 0, 97, 121
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "选择"
+FONT 10, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    PUSHBUTTON      "视觉场景定义",IDC_Vision,7,7,83,45
+    PUSHBUTTON      "激光场景定义",IDC_Laser,7,67,83,45
+END
+
+IDD_Station DIALOGEX 0, 0, 178, 168
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "站坪号机位号设置"
+FONT 10, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,35,147,35,14
+    PUSHBUTTON      "取消",IDCANCEL,101,147,35,14
+    LTEXT           "站坪号",IDC_STATIC,27,9,45,13
+    EDITTEXT        IDC_StationNum,89,7,51,15,ES_AUTOHSCROLL
+    LTEXT           "机位号",IDC_STATIC,27,31,45,13
+    EDITTEXT        IDC_placement,89,29,51,15,ES_AUTOHSCROLL
+    LTEXT           "停止距离",IDC_STATIC,27,53,45,13
+    EDITTEXT        IDC_stopdistance,89,51,51,15,ES_AUTOHSCROLL
+    LTEXT           "过远距离",IDC_STATIC,27,75,45,13
+    EDITTEXT        IDC_toofardistance,89,73,51,15,ES_AUTOHSCROLL
+    LTEXT           "泊位速度",IDC_STATIC,27,97,45,13
+    EDITTEXT        IDC_speed,89,95,51,15,ES_AUTOHSCROLL
+    LTEXT           "自动关机时间",IDC_STATIC,27,119,45,13
+    EDITTEXT        IDC_PCtime,89,117,51,15,ES_AUTOHSCROLL
+END
+
+IDD_GuideLineNum DIALOGEX 0, 0, 132, 110
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "引导线编号"
+FONT 9, "Microsoft Sans Serif", 400, 0, 0x0
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,7,89,50,14
+    PUSHBUTTON      "取消",IDCANCEL,72,89,50,14
+    LTEXT           "引导线编号",IDC_STATIC,16,20,37,13
+    COMBOBOX        IDC_COMBOGuideLine,60,19,50,66,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_Laster DIALOGEX 0, 0, 588, 370
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "激光场景设置"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "保存并退出",IDOK,396,337,57,26
+    PUSHBUTTON      "取消",IDCANCEL,461,337,57,26
+    LTEXT           "安装高度",IDC_STATIC,15,48,51,13
+    EDITTEXT        IDC_EDIT_InstallHigh,81,44,61,17,ES_AUTOHSCROLL
+    GROUPBOX        "引导线",IDC_STATIC,163,6,155,178
+    PUSHBUTTON      "启动",IDC_Connect,45,16,64,21
+    PUSHBUTTON      "走步设置",IDC_WalkSet,171,17,53,21
+    PUSHBUTTON      "走步测试",IDC_WalkTest,171,39,53,21
+    GROUPBOX        "状态",IDC_STATIC_WalkSet,232,14,78,92
+    LTEXT           "详细情况",IDC_STATIC_WalkText,240,29,63,71
+    CONTROL         "",IDC_MSCOMM1,"{648A5600-2C6E-101B-82B6-000000000014}",WS_TABSTOP,80,167,25,23
+    GROUPBOX        "设置",IDC_STATIC,7,7,140,156
+    LTEXT           "对象高度",IDC_STATIC,15,76,51,13
+    EDITTEXT        IDC_EDIT_ObjectHigh,81,72,61,17,ES_AUTOHSCROLL
+    LTEXT           "对象距离",IDC_STATIC,15,104,51,13
+    EDITTEXT        IDC_EDIT_ObjectDis,81,100,61,17,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_End_x,57,130,24,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_Start_x,18,130,24,15,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_StandHigh,99,130,24,15,ES_AUTOHSCROLL
+    LTEXT           "起始X",IDC_STATIC,18,147,21,13
+    LTEXT           "结束X",IDC_STATIC,59,147,21,13
+    LTEXT           "垂直步数",IDC_STATIC,94,147,32,13
+    PUSHBUTTON      "停止",IDC_BTN_Clear,171,60,53,21
+    PUSHBUTTON      "编号",IDC_StopLine,171,104,53,21
+    GROUPBOX        "校准",IDC_STATIC,7,191,152,165
+    PUSHBUTTON      "置为零点",IDC_BUTTON_SetZero,252,207,51,21
+    PUSHBUTTON      "左移",IDC_BUTTON_Left,18,235,64,21
+    PUSHBUTTON      "上移",IDC_BUTTON_Up,89,265,64,21
+    PUSHBUTTON      "垂直标定",IDC_BUTTON_Calibration,252,329,51,21
+    PUSHBUTTON      "单点测量",IDC_BUTTON_Locate,18,297,64,21
+    PUSHBUTTON      "右移",IDC_BUTTON_Right,89,235,64,21
+    PUSHBUTTON      "下移",IDC_BUTTON_Down,18,265,64,21
+    LTEXT           "",IDC_EDIT_Mid,92,297,55,24
+    GROUPBOX        "标定",IDC_STATIC,178,191,132,164
+    PUSHBUTTON      "水平标定",IDC_BUTTON_HRZCALIBRATION,186,329,51,21
+    PUSHBUTTON      "校准",IDC_BUTTON_DETECT,18,205,64,21
+    PUSHBUTTON      "确定边框",IDC_BUTTON_EDGE,186,207,51,21
+    PUSHBUTTON      "向左10步",IDC_BUTTON_LEFTTEN,252,270,51,21
+    PUSHBUTTON      "向右10步",IDC_BUTTON_RIGHTTEN,252,299,51,21
+    PUSHBUTTON      "上移10步",IDC_BUTTON_UPTEN,186,270,51,21
+    PUSHBUTTON      "下移10步",IDC_BUTTON_DOWNTEN,186,299,51,21
+    PUSHBUTTON      "二维扫描",IDC_BUTTON_TWOD,252,238,51,21
+    PUSHBUTTON      "回到零点",IDC_BUTTON_RESET,186,238,51,21
+    LTEXT           "\n\t可视化：",IDC_STATIC_Draw,333,11,186,274,WS_BORDER
+    PUSHBUTTON      "自动寻点",IDC_BUTTON_PREPARE,531,273,50,14
+    EDITTEXT        IDC_EDIT_GuideLineY,265,111,42,14,ES_AUTOHSCROLL
+    LTEXT           "停止线y",IDC_STATIC,235,114,29,8
+    PUSHBUTTON      "画图测试",IDC_BUTTON8,531,249,50,14
+    PUSHBUTTON      "保存",IDSAVE,330,337,57,26
+    PUSHBUTTON      "读取边框",IDC_BUTTON_READEDGE,89,205,64,21
+    PUSHBUTTON      "读取停止线",IDC_BUTTON_READGUIDELINE,531,225,50,14
+    PUSHBUTTON      "校准激光",IDC_BUTTON10,531,199,50,14,BS_CENTER
+    PUSHBUTTON      "原始 / xy 切换",IDC_BUTTON_2DSWITCH3D,347,288,60,20
+    PUSHBUTTON      "清屏",IDC_BUTTON_CLC,438,288,60,20
+    PUSHBUTTON      "验证停止点",IDC_BUTTON_COMFIRMTYPE,199,163,69,17
+    PUSHBUTTON      "由机型读取引导线",IDC_BUTTON_READTYPE,221,129,75,14
+    EDITTEXT        IDC_EDIT_PlaneType,177,130,40,14,ES_RIGHT | ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_LineNum,177,147,40,14,ES_RIGHT | ES_AUTOHSCROLL
+    PUSHBUTTON      "由编号读取引导线",IDC_BUTTON_READLINENUM,221,146,76,14
+    PUSHBUTTON      "确认",IDC_BUTTON_ConfirmWalkSet,171,82,25,21
+    PUSHBUTTON      "清空",IDC_BUTTON_ClearWalkSet,199,82,25,21
+    PUSHBUTTON      "打开红色激光",IDC_BUTTON_RedLaserOn,18,324,64,14
+    PUSHBUTTON      "关闭红色激光",IDC_BUTTON_RedLaserOff,18,338,64,14
+    PUSHBUTTON      "窗口扫描",IDC_BUTTON_ScanAll,89,326,64,21
+    PUSHBUTTON      "离线测试",IDC_BUTTON11,531,174,50,14,0,WS_EX_ACCEPTFILES
+END
+
+IDD_LineNum DIALOGEX 0, 0, 155, 140
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "引导线停止线编号设置"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,17,113,50,14
+    PUSHBUTTON      "取消",IDCANCEL,91,113,50,14
+    LTEXT           "引导线编号",IDC_STATIC,18,15,46,12
+    COMBOBOX        IDC_COMBO_Lineguide,15,28,47,81,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "停止线编号",IDC_STATIC,90,15,46,12
+    COMBOBOX        IDC_COMBO_Linestop,87,28,47,81,CBS_DROPDOWN | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_Pointnum DIALOGEX 0, 0, 153, 138
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "标记点"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,14,101,50,14
+    PUSHBUTTON      "取消",IDCANCEL,87,101,50,14
+    LTEXT           "引导线编号",IDC_STATIC,15,25,47,12
+    EDITTEXT        IDC_EDITnum,63,22,54,15,ES_AUTOHSCROLL
+    LTEXT           "距离",IDC_STATIC,25,47,37,12
+    EDITTEXT        IDC_distance,63,44,54,15,ES_AUTOHSCROLL
+END
+
+IDD_choose DIALOGEX 0, 0, 120, 111
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "选择"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "插入点",ID_PointInsert,20,18,74,26
+    PUSHBUTTON      "重写点",ID_PointRenew,20,62,74,26
+END
+
+IDD_PlaneData DIALOGEX 0, 0, 548, 225
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "机型信息"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,58,204,50,14
+    PUSHBUTTON      "取消",IDCANCEL,401,204,50,14
+    LTEXT           "机型",IDC_STATIC,28,16,39,14
+    EDITTEXT        IDC_type,76,13,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_Cabin_Width,76,38,55,16,ES_AUTOHSCROLL
+    LTEXT           "Wing_Width",IDC_STATIC,148,42,39,12
+    EDITTEXT        IDC_Wing_Width,199,38,55,16,ES_AUTOHSCROLL
+    LTEXT           "Cabin_Width",IDC_STATIC,27,40,46,14
+    EDITTEXT        IDC_Head_Height,326,38,55,16,ES_AUTOHSCROLL
+    LTEXT           "Head_Wheel_HoriDis",IDC_STATIC,399,40,71,14
+    EDITTEXT        IDC_Head_Wheel_HoriDis,475,38,55,16,ES_AUTOHSCROLL
+    LTEXT           "Head_Height",IDC_STATIC,274,40,45,14
+    EDITTEXT        IDC_Engine_Centerdis,76,63,55,16,ES_AUTOHSCROLL
+    LTEXT           "Engine_Radius",IDC_STATIC,148,66,39,12
+    EDITTEXT        IDC_Engine_Radius,199,63,55,16,ES_AUTOHSCROLL
+    LTEXT           "Engine_Centerdis",IDC_STATIC,27,65,46,14
+    EDITTEXT        IDC_Center_floor_Dis,326,63,55,16,ES_AUTOHSCROLL
+    LTEXT           "NumHorizontalCurveFactor",IDC_STATIC,399,65,71,14
+    EDITTEXT        IDC_NumHorizontalCurveFactor,475,63,55,16,ES_AUTOHSCROLL
+    LTEXT           "Center_floor_Dis",IDC_STATIC,274,65,45,14
+    EDITTEXT        IDC_NorzatalXmaxfromHead,77,89,55,16,ES_AUTOHSCROLL
+    LTEXT           "minAverage",IDC_STATIC,149,93,39,12
+    EDITTEXT        IDC_minAverage,200,89,55,16,ES_AUTOHSCROLL
+    LTEXT           "NorzatalXmaxfromHead",IDC_STATIC,28,91,46,14
+    EDITTEXT        IDC_maxAverage,327,89,55,16,ES_AUTOHSCROLL
+    LTEXT           "maxAverage",IDC_STATIC,275,91,45,14
+    LTEXT           "Norizontal CurveFactor",IDC_STATIC,28,114,95,14
+    EDITTEXT        IDC_NorizontalCurveFactor1,29,127,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor2,111,127,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor3,190,126,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor4,265,126,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor5,341,125,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor6,30,154,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor7,111,154,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor8,190,154,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor9,267,154,55,16,ES_AUTOHSCROLL
+    EDITTEXT        IDC_NorizontalCurveFactor10,343,153,55,16,ES_AUTOHSCROLL
+END
+
+IDD_DLG_SETTING DIALOGEX 0, 0, 360, 203
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "参数设置"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "确定",IDOK,205,182,50,14
+    PUSHBUTTON      "取消",IDCANCEL,303,182,50,14
+    CONTROL         "",IDC_MFCPROPERTYGRID3,"MfcPropertyGrid",0x100,19,29,140,125
+    CONTROL         "",IDC_MFCPROPERTYGRID4,"MfcPropertyGrid",0x0,193,28,140,125
+    GROUPBOX        "COM口设置",IDC_STATIC,15,18,152,141
+    GROUPBOX        "引导参数设置",IDC_STATIC,186,18,152,141
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080403a8"
+        BEGIN
+            VALUE "CompanyName", "TODO: <公司名>"
+            VALUE "FileDescription", "TODO: <文件说明>"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "config.exe"
+            VALUE "LegalCopyright", "TODO: (C) <公司名>。保留所有权利。"
+            VALUE "OriginalFilename", "config.exe"
+            VALUE "ProductName", "TODO: <产品名>"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 936
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 163
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 55
+    END
+
+    IDD_DLG_CheckPanel, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        RIGHTMARGIN, 64
+        TOPMARGIN, 1
+        BOTTOMMARGIN, 344
+    END
+
+    IDD_PlaneType, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 220
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 181
+    END
+
+    IDD_TYPE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 90
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 114
+    END
+
+    IDD_Station, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 171
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 161
+    END
+
+    IDD_GuideLineNum, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 125
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 103
+    END
+
+    IDD_Laster, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 581
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 363
+    END
+
+    IDD_LineNum, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 148
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 133
+    END
+
+    IDD_Pointnum, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 146
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 131
+    END
+
+    IDD_choose, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 113
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 104
+    END
+
+    IDD_PlaneData, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 541
+        BOTTOMMARGIN, 218
+    END
+
+    IDD_DLG_SETTING, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 353
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 196
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU
+BEGIN
+    POPUP "文件(&F)"
+    BEGIN
+        MENUITEM "新建(&N)\tCtrl+N",              ID_FILE_NEW
+        MENUITEM "打开(&O)...\tCtrl+O",           ID_FILE_OPEN
+        MENUITEM "保存(&S)\tCtrl+S",              ID_FILE_SAVE
+        MENUITEM "另存为(&A)...",                  ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "打印(&P)...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "打印预览(&V)",                    ID_FILE_PRINT_PREVIEW
+        MENUITEM "打印设置(&R)...",                 ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "最近的文件",                       ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "退出(&X)",                      ID_APP_EXIT
+    END
+    POPUP "编辑(&E)"
+    BEGIN
+        MENUITEM "撤消(&U)\tCtrl+Z",              ID_EDIT_UNDO
+        MENUITEM SEPARATOR
+        MENUITEM "剪切(&T)\tCtrl+X",              ID_EDIT_CUT
+        MENUITEM "复制(&C)\tCtrl+C",              ID_EDIT_COPY
+        MENUITEM "粘贴(&P)\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "视图(&V)"
+    BEGIN
+        MENUITEM "状态栏(&S)",                     ID_VIEW_STATUS_BAR
+    END
+    POPUP "帮助(&H)"
+    BEGIN
+        MENUITEM "关于 config(&A)...",            ID_APP_ABOUT
+    END
+END
+
+IDR_MENU1 MENU
+BEGIN
+    POPUP "站坪号机位号"
+    BEGIN
+        MENUITEM "设置站坪号机位号",                    ID_station
+    END
+    POPUP "图像模式"
+    BEGIN
+        MENUITEM "打开图像",                        ID_OpenImg
+        MENUITEM "退出图像模式",                      ID_ExitImg
+        MENUITEM "显示上次配置",                      ID_LastConfig
+        MENUITEM "重新配置",                        ID_ReConfig
+    END
+    POPUP "视频模式"
+    BEGIN
+        MENUITEM "启动视频",                        ID_StartVideo
+        MENUITEM "暂停视频",                        ID_StopVideo
+        MENUITEM "关闭视频模式",                      ID_ExitVideo
+        MENUITEM "保存图像",                        32793
+    END
+    POPUP "激光部分"
+    BEGIN
+        MENUITEM "激光场景设置",                      ID_Laster
+    END
+    POPUP "设置"
+    BEGIN
+        MENUITEM "添加机型信息",                      32794
+        MENUITEM "修改COM设置",                     ID_32798
+        MENUITEM "修改引导参数",                      ID_32799
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_Laster DLGINIT
+BEGIN
+    IDC_MSCOMM1, 0x376, 102, 0
+0x0013, 0x0000, 0x0043, 0x006f, 0x0070, 0x0079, 0x0072, 0x0069, 0x0067, 
+0x0068, 0x0074, 0x0020, 0x0028, 0x0063, 0x0029, 0x0020, 0x0031, 0x0039, 
+0x0039, 0x0034, 0x0020, 0x4321, 0x1234, 0x0008, 0x0000, 0x03ed, 0x0000, 
+0x03ed, 0x0000, 0x5601, 0x648a, 0x0000, 0x0006, 0x0000, 0x0001, 0x0400, 
+0x0000, 0x0200, 0x0000, 0x2580, 0x0000, 0x0000, 0x0008, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x003f, 0x0000, 0x0001, 0x0000, 
+    0
+END
+
+IDD_DLG_SETTING DLGINIT
+BEGIN
+    IDC_MFCPROPERTYGRID3, 0x37c, 414, 0
+0x4d3c, 0x4346, 0x7250, 0x706f, 0x7265, 0x7974, 0x7247, 0x6469, 0x485f, 
+0x6165, 0x6564, 0x4372, 0x7274, 0x3e6c, 0x4146, 0x534c, 0x3c45, 0x4d2f, 
+0x4346, 0x7250, 0x706f, 0x7265, 0x7974, 0x7247, 0x6469, 0x485f, 0x6165, 
+0x6564, 0x4372, 0x7274, 0x3e6c, 0x4d3c, 0x4346, 0x7250, 0x706f, 0x7265, 
+0x7974, 0x7247, 0x6469, 0x445f, 0x7365, 0x7263, 0x7069, 0x6974, 0x6e6f, 
+0x7241, 0x6165, 0x543e, 0x5552, 0x3c45, 0x4d2f, 0x4346, 0x7250, 0x706f, 
+0x7265, 0x7974, 0x7247, 0x6469, 0x445f, 0x7365, 0x7263, 0x7069, 0x6974, 
+0x6e6f, 0x7241, 0x6165, 0x3c3e, 0x464d, 0x5043, 0x6f72, 0x6570, 0x7472, 
+0x4779, 0x6972, 0x5f64, 0x6c41, 0x6870, 0x6261, 0x7465, 0x6369, 0x6f4d, 
+0x6564, 0x463e, 0x4c41, 0x4553, 0x2f3c, 0x464d, 0x5043, 0x6f72, 0x6570, 
+0x7472, 0x4779, 0x6972, 0x5f64, 0x6c41, 0x6870, 0x6261, 0x7465, 0x6369, 
+0x6f4d, 0x6564, 0x3c3e, 0x464d, 0x5043, 0x6f72, 0x6570, 0x7472, 0x4779, 
+0x6972, 0x5f64, 0x6f4d, 0x6964, 0x6966, 0x6465, 0x7250, 0x706f, 0x7265, 
+0x6974, 0x7365, 0x463e, 0x4c41, 0x4553, 0x2f3c, 0x464d, 0x5043, 0x6f72, 
+0x6570, 0x7472, 0x4779, 0x6972, 0x5f64, 0x6f4d, 0x6964, 0x6966, 0x6465, 
+0x7250, 0x706f, 0x7265, 0x6974, 0x7365, 0x3c3e, 0x464d, 0x5043, 0x6f72, 
+0x6570, 0x7472, 0x4779, 0x6972, 0x5f64, 0x5356, 0x6f44, 0x4e74, 0x7465, 
+0x6f4c, 0x6b6f, 0x543e, 0x5552, 0x3c45, 0x4d2f, 0x4346, 0x7250, 0x706f, 
+0x7265, 0x7974, 0x7247, 0x6469, 0x565f, 0x4453, 0x746f, 0x654e, 0x4c74, 
+0x6f6f, 0x3e6b, 0x4d3c, 0x4346, 0x7250, 0x706f, 0x7265, 0x7974, 0x7247, 
+0x6469, 0x445f, 0x7365, 0x7263, 0x7069, 0x6974, 0x6e6f, 0x6f52, 0x7377, 
+0x333e, 0x2f3c, 0x464d, 0x5043, 0x6f72, 0x6570, 0x7472, 0x4779, 0x6972, 
+0x5f64, 0x6544, 0x6373, 0x6972, 0x7470, 0x6f69, 0x526e, 0x776f, 0x3e73, 
+
+    IDC_MFCPROPERTYGRID4, 0x37c, 414, 0
+0x4d3c, 0x4346, 0x7250, 0x706f, 0x7265, 0x7974, 0x7247, 0x6469, 0x485f, 
+0x6165, 0x6564, 0x4372, 0x7274, 0x3e6c, 0x4146, 0x534c, 0x3c45, 0x4d2f, 
+0x4346, 0x7250, 0x706f, 0x7265, 0x7974, 0x7247, 0x6469, 0x485f, 0x6165, 
+0x6564, 0x4372, 0x7274, 0x3e6c, 0x4d3c, 0x4346, 0x7250, 0x706f, 0x7265, 
+0x7974, 0x7247, 0x6469, 0x445f, 0x7365, 0x7263, 0x7069, 0x6974, 0x6e6f, 
+0x7241, 0x6165, 0x543e, 0x5552, 0x3c45, 0x4d2f, 0x4346, 0x7250, 0x706f, 
+0x7265, 0x7974, 0x7247, 0x6469, 0x445f, 0x7365, 0x7263, 0x7069, 0x6974, 
+0x6e6f, 0x7241, 0x6165, 0x3c3e, 0x464d, 0x5043, 0x6f72, 0x6570, 0x7472, 
+0x4779, 0x6972, 0x5f64, 0x6c41, 0x6870, 0x6261, 0x7465, 0x6369, 0x6f4d, 
+0x6564, 0x463e, 0x4c41, 0x4553, 0x2f3c, 0x464d, 0x5043, 0x6f72, 0x6570, 
+0x7472, 0x4779, 0x6972, 0x5f64, 0x6c41, 0x6870, 0x6261, 0x7465, 0x6369, 
+0x6f4d, 0x6564, 0x3c3e, 0x464d, 0x5043, 0x6f72, 0x6570, 0x7472, 0x4779, 
+0x6972, 0x5f64, 0x6f4d, 0x6964, 0x6966, 0x6465, 0x7250, 0x706f, 0x7265, 
+0x6974, 0x7365, 0x463e, 0x4c41, 0x4553, 0x2f3c, 0x464d, 0x5043, 0x6f72, 
+0x6570, 0x7472, 0x4779, 0x6972, 0x5f64, 0x6f4d, 0x6964, 0x6966, 0x6465, 
+0x7250, 0x706f, 0x7265, 0x6974, 0x7365, 0x3c3e, 0x464d, 0x5043, 0x6f72, 
+0x6570, 0x7472, 0x4779, 0x6972, 0x5f64, 0x5356, 0x6f44, 0x4e74, 0x7465, 
+0x6f4c, 0x6b6f, 0x543e, 0x5552, 0x3c45, 0x4d2f, 0x4346, 0x7250, 0x706f, 
+0x7265, 0x7974, 0x7247, 0x6469, 0x565f, 0x4453, 0x746f, 0x654e, 0x4c74, 
+0x6f6f, 0x3e6b, 0x4d3c, 0x4346, 0x7250, 0x706f, 0x7265, 0x7974, 0x7247, 
+0x6469, 0x445f, 0x7365, 0x7263, 0x7069, 0x6974, 0x6e6f, 0x6f52, 0x7377, 
+0x333e, 0x2f3c, 0x464d, 0x5043, 0x6f72, 0x6570, 0x7472, 0x4779, 0x6972, 
+0x5f64, 0x6544, 0x6373, 0x6972, 0x7470, 0x6f69, 0x526e, 0x776f, 0x3e73, 
+
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDP_OLE_INIT_FAILED     "OLE 初始化失败。请确保 OLE 库是正确的版本。"
+END
+
+STRINGTABLE
+BEGIN
+    IDR_MAINFRAME           "config\n\nconfig\n\n\nconfig.Document\nconfig.Document"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_APP_TITLE       "config"
+    AFX_IDS_IDLEMESSAGE     "就绪"
+END
+
+STRINGTABLE
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_NEW             "创建新文档\n新建"
+    ID_FILE_OPEN            "打开现有文档\n打开"
+    ID_FILE_CLOSE           "关闭活动文档\n关闭"
+    ID_FILE_SAVE            "保存活动文档\n保存"
+    ID_FILE_SAVE_AS         "用新名称保存活动文档\n另存为"
+    ID_FILE_PAGE_SETUP      "更改打印选项\n页面设置"
+    ID_FILE_PRINT_SETUP     "更改打印机选项和打印选项\n打印设置"
+    ID_FILE_PRINT           "打印活动文档\n打印"
+    ID_FILE_PRINT_PREVIEW   "显示整页\n打印预览"
+END
+
+STRINGTABLE
+BEGIN
+    ID_APP_ABOUT            "显示程序信息、版本号和版权\n关于"
+    ID_APP_EXIT             "退出应用程序；提示保存文档\n退出"
+END
+
+STRINGTABLE
+BEGIN
+    ID_FILE_MRU_FILE1       "打开此文档"
+    ID_FILE_MRU_FILE2       "打开此文档"
+    ID_FILE_MRU_FILE3       "打开此文档"
+    ID_FILE_MRU_FILE4       "打开此文档"
+    ID_FILE_MRU_FILE5       "打开此文档"
+    ID_FILE_MRU_FILE6       "打开此文档"
+    ID_FILE_MRU_FILE7       "打开此文档"
+    ID_FILE_MRU_FILE8       "打开此文档"
+    ID_FILE_MRU_FILE9       "打开此文档"
+    ID_FILE_MRU_FILE10      "打开此文档"
+    ID_FILE_MRU_FILE11      "打开此文档"
+    ID_FILE_MRU_FILE12      "打开此文档"
+    ID_FILE_MRU_FILE13      "打开此文档"
+    ID_FILE_MRU_FILE14      "打开此文档"
+    ID_FILE_MRU_FILE15      "打开此文档"
+    ID_FILE_MRU_FILE16      "打开此文档"
+END
+
+STRINGTABLE
+BEGIN
+    ID_NEXT_PANE            "切换到下一个窗格\n下一窗格"
+    ID_PREV_PANE            "切换回上一个窗格\n上一窗格"
+END
+
+STRINGTABLE
+BEGIN
+    ID_WINDOW_SPLIT         "将活动窗口拆分为多个窗格\n拆分"
+END
+
+STRINGTABLE
+BEGIN
+    ID_EDIT_CLEAR           "清除选定内容\n清除"
+    ID_EDIT_CLEAR_ALL       "清除全部内容\n全部清除"
+    ID_EDIT_COPY            "复制选定内容并将其放到剪贴板上\n复制"
+    ID_EDIT_CUT             "剪切选定内容并将其放到剪贴板上\n剪切"
+    ID_EDIT_FIND            "查找指定的文本\n查找"
+    ID_EDIT_PASTE           "插入剪贴板内容\n粘贴"
+    ID_EDIT_REPEAT          "重复上一操作\n重复"
+    ID_EDIT_REPLACE         "用其他文本替换特定的文本\n替换"
+    ID_EDIT_SELECT_ALL      "选定整个文档\n全选"
+    ID_EDIT_UNDO            "撤消上一操作\n撤消"
+    ID_EDIT_REDO            "恢复上次撤消的操作\n重做"
+END
+
+STRINGTABLE
+BEGIN
+    ID_VIEW_STATUS_BAR      "显示或隐藏状态栏\n切换状态栏"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCSIZE          "更改窗口大小"
+    AFX_IDS_SCMOVE          "更改窗口位置"
+    AFX_IDS_SCMINIMIZE      "将窗口缩小为图标"
+    AFX_IDS_SCMAXIMIZE      "使窗口最大化显示"
+    AFX_IDS_SCNEXTWINDOW    "切换到下一个文档窗口"
+    AFX_IDS_SCPREVWINDOW    "切换到前一个文档窗口"
+    AFX_IDS_SCCLOSE         "关闭活动窗口并提示保存文档"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_SCRESTORE       "将窗口恢复到正常大小"
+    AFX_IDS_SCTASKLIST      "激活任务列表"
+END
+
+STRINGTABLE
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "关闭打印预览模式\n取消预览"
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE 4, 2
+#pragma code_page(936)
+#include "res\config.rc2"  // 非 Microsoft Visual C++ 编辑的资源
+#include "l.CHS\afxres.rc"          // 标准组件
+#include "l.CHS\afxprint.rc"        // 打印/打印预览资源
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

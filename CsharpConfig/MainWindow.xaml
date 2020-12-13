@@ -1,0 +1,1393 @@
+﻿<Controls:MetroWindow x:Class="VIDGS配置软件.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:local="clr-namespace:VIDGS配置软件" 
+		xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+		xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
+		xmlns:ec="http://schemas.microsoft.com/expression/2010/controls" 
+		xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"             
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+		Title="VIDGS配置软件"   WindowStartupLocation="CenterScreen" 
+		SizeToContent="WidthAndHeight"  AllowsTransparency="True"
+		AllowDrop="True" Loaded="MainWindow_Loaded"
+		EnableDWMDropShadow="True" ResizeMode="CanMinimize"
+		WindowTransitionsEnabled="False"  Closing="Window_Closing"
+		Height="768" Width="1024">
+	<Window.Resources>
+		<local:GNumArr x:Key="GuideNum"/>
+		<local:SNumArr x:Key="StopNum"/>
+		<cm:BackgroundWorker x:Key="backgroundWorker"
+		  WorkerReportsProgress="True" WorkerSupportsCancellation="True"
+		  DoWork="backgroundWorker_DoWork" ProgressChanged="backgroundWorker_ProgressChanged" 
+		  RunWorkerCompleted="backgroundWorker_RunWorkerCompleted"></cm:BackgroundWorker>
+		<LinearGradientBrush x:Key="MenuPopupBrush"
+					   EndPoint="0.5,1"
+					   StartPoint="0.5,0">
+			<GradientStop Color="#7FFFFFFF"
+				  Offset="0" />
+			<GradientStop Color="#C28B008B"
+				  Offset="0.3"/>
+			<GradientStop Color="#FF4B0082"
+				  Offset="1" />
+		</LinearGradientBrush>
+        <!-- Animation for showing the Person Info control -->
+        <Storyboard x:Key="Showabout">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="aboutControl" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="aboutControl" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Visible}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="Hideabout">
+            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="aboutControl">
+                <SplineDoubleKeyFrame KeyTime="00:00:00" Value="1"/>
+                <SplineDoubleKeyFrame KeyTime="00:00:00.3000000" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="aboutControl" Storyboard.TargetProperty="(UIElement.Visibility)">
+                <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                <DiscreteObjectKeyFrame KeyTime="00:00:00.3000000" Value="{x:Static Visibility.Hidden}"/>
+            </ObjectAnimationUsingKeyFrames>
+        </Storyboard>
+        <!-- Animation for shining -->
+        <Storyboard x:Key="startshine" >
+            <ColorAnimation Storyboard.TargetName="shine_test" BeginTime="00:00:00.5000000"
+                            Storyboard.TargetProperty="Fill.GradientStops[0].Color" 
+                            To="Red"  Duration="00:00:00.5000000"
+                            AutoReverse="True" RepeatBehavior="Forever">
+            </ColorAnimation>
+        </Storyboard>
+        <Storyboard x:Key="shine_toGreen">
+            <ColorAnimation Storyboard.TargetName="shine_test" BeginTime="00:00:00" 
+                            Storyboard.TargetProperty="Fill.GradientStops[0].Color" 
+                            To="Green" Duration="00:00:00.3000000">
+            </ColorAnimation>
+        </Storyboard>
+        <Style x:Key="MyContextMenu" TargetType="{x:Type ContextMenu}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type ContextMenu}">
+						<Border x:Name="Border" CornerRadius="4"
+				  Background="{StaticResource MenuPopupBrush}" 
+				  BorderThickness="1">
+							<Border.BorderBrush>
+								<SolidColorBrush Color="#FF888888" />
+							</Border.BorderBrush>
+							<StackPanel IsItemsHost="True"
+					   KeyboardNavigation.DirectionalNavigation="Cycle" />
+
+						</Border>
+						<ControlTemplate.Triggers>
+							<MultiTrigger>
+								<MultiTrigger.Conditions>
+									<Condition Property="IsMouseOver" Value="True"/>
+								</MultiTrigger.Conditions>
+								<MultiTrigger.EnterActions>
+									<BeginStoryboard>
+										<Storyboard>
+											<DoubleAnimationUsingKeyFrames BeginTime="00:00:00"  Storyboard.TargetProperty="(FrameworkElement.Width)">
+												<SplineDoubleKeyFrame KeyTime="00:00:00.0020000" Value="0"/>
+												<SplineDoubleKeyFrame KeyTime="00:00:00.2520000" Value="142"/>
+												<SplineDoubleKeyFrame KeyTime="00:00:00.3450000" Value="120"/>
+												<SplineDoubleKeyFrame KeyTime="00:00:00.4300000" Value="142"/>
+											</DoubleAnimationUsingKeyFrames>
+											<DoubleAnimationUsingKeyFrames BeginTime="00:00:00"  Storyboard.TargetProperty="(FrameworkElement.Height)">
+												<SplineDoubleKeyFrame KeyTime="00:00:00.0020000" Value="0"/>
+												<SplineDoubleKeyFrame KeyTime="00:00:00.2520000" Value="200"/>
+												<SplineDoubleKeyFrame KeyTime="00:00:00.3450000" Value="170"/>
+												<SplineDoubleKeyFrame KeyTime="00:00:00.4300000" Value="200"/>
+											</DoubleAnimationUsingKeyFrames>
+										</Storyboard>
+									</BeginStoryboard>
+								</MultiTrigger.EnterActions>
+							</MultiTrigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
+	<Grid Height="728" Width="1024" Margin="-2,-4,-4,-2">
+		<Grid.Background>
+			<LinearGradientBrush >
+				<GradientBrush.GradientStops>
+					<GradientStopCollection>
+						<GradientStop Color="#24B5BF" Offset="0.0"/>
+						<GradientStop Color="#CCC7A3"  Offset="1.0"/>
+					</GradientStopCollection>
+				</GradientBrush.GradientStops>
+			</LinearGradientBrush>
+		</Grid.Background>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<avalonDock:DockingManager Grid.Row="0">
+            <avalonDock:DockingManager.Theme>
+                <avalonDock:AeroTheme/>
+            </avalonDock:DockingManager.Theme>
+            <avalonDock:DockingManager.DocumentHeaderTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<Image Source="{Binding IconSource}" Margin="0,0,4,0"/>
+						<TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis"/>
+					</StackPanel>
+				</DataTemplate>
+			</avalonDock:DockingManager.DocumentHeaderTemplate>
+			<avalonDock:LayoutRoot>
+				<avalonDock:LayoutPanel Orientation="Horizontal">
+					<avalonDock:LayoutDocumentPaneGroup>
+						<avalonDock:LayoutDocumentPane>
+                            <avalonDock:LayoutDocument CanClose="False" CanFloat="True" ContentId="document1" Title="视觉设置界面">
+								<Grid  Width="Auto" Height="Auto"  Margin="0,0,0,0">
+                                    <Grid.Background>
+                                        <LinearGradientBrush >
+                                            <GradientBrush.GradientStops>
+                                                <GradientStopCollection>
+                                                    <GradientStop Color="#24B5BF" Offset="0.0"/>
+                                                    <GradientStop Color="#CCC7A3"  Offset="1.0"/>
+                                                </GradientStopCollection>
+                                            </GradientBrush.GradientStops>
+                                        </LinearGradientBrush>
+                                    </Grid.Background>
+                                    <Grid.RowDefinitions>
+										<RowDefinition Height="137"/>
+										<RowDefinition Height="*"/>
+									</Grid.RowDefinitions>
+                                    <StackPanel  Grid.Row="0"  Orientation="Horizontal">
+                                        <Controls:Tile x:Name="Tile_Play" Title="开启相机" 
+								   Height="Auto" Margin="8,5,8,0" Click="button_Play_Click">
+											<Rectangle Width="120" Height="80"
+									   Margin="0,0,0,28">
+												<Rectangle.Fill>
+													<VisualBrush  Stretch="Fill" Visual="{StaticResource appbar_camera_auto}" />
+												</Rectangle.Fill>
+											</Rectangle>
+										</Controls:Tile>
+                                        <Controls:Tile  Title="   系统基础属性 "  Height="Auto" Margin="8,5,8,0" 
+                                                        Click="button_SystemPara_Click">
+											<Rectangle  Width="120" Height="80"
+                                                        Margin="0,0,0,30">
+												<Rectangle.Fill>
+													<VisualBrush Stretch="Fill"
+                                                                 Visual="{StaticResource appbar_settings}" />
+												</Rectangle.Fill>
+											</Rectangle>
+										</Controls:Tile>
+                                        <Controls:Tile Title="标定工具" Height="Auto" Margin="8,5,8,0"  Click="TI4_open">
+											<Rectangle  Width="120" Height="80"
+                                                        Margin="0,0,0,28">
+												<Rectangle.Fill>
+													<VisualBrush Stretch="Fill"
+                                                                 Visual="{StaticResource appbar_tools}" />
+												</Rectangle.Fill>
+											</Rectangle>
+										</Controls:Tile>
+                                        <Controls:Tile  Title="机型设置" 
+								                         Height="Auto" Margin="8,5,8,0"  
+                                                        Click="button_SetModel_Click">
+                                            <Rectangle  Width="120" Height="80"
+								                             Margin="0,0,0,28">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill"
+												               Visual="{StaticResource appbar_plane}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Controls:Tile>
+                                        <Controls:Tile  Title="保存视觉配置" 
+								                        Height="Auto"  Margin="8,5,8,0" 
+                                                        Click="button_Vision_Para_Click">
+											<Rectangle  Width="120" Height="80"
+								                        Margin="0,0,0,28">
+												<Rectangle.Fill>
+													<VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_save}" />
+												</Rectangle.Fill>
+											</Rectangle>
+										</Controls:Tile>
+                                        <Controls:Tile  Title="关于" 
+								                        Height="Auto"  Margin="8,5,8,0" 
+                                                        Click="button_about_Click">
+                                            <Rectangle  Width="120" Height="80"
+								                        Margin="0,0,0,28">
+                                                <Rectangle.Fill>
+                                                    <VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_scrabble_v}" />
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                        </Controls:Tile>
+                                    </StackPanel>
+                                    <Grid Grid.Row="1">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="30"/>
+                                            <RowDefinition Height="80"/>
+                                            <RowDefinition Height="80"/>
+                                            <RowDefinition Height="80"/>
+                                            <RowDefinition Height="80"/>
+                                            <RowDefinition Height="80"/>
+                                            <RowDefinition Height="80"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="180"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition Width="180"/>
+                                            <ColumnDefinition Width="80"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Ellipse  Grid.Row="1" Grid.Column="2" x:Name="Checkbox_Server" Margin="17"  Stroke="Black" StrokeThickness="1">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label Foreground="Black" FontSize="24"  Grid.Column="1" Grid.Row="1" Margin="0,0,0,0" Content="管理系统" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Ellipse  Grid.Row="2" Grid.Column="2" x:Name="Checkbox_LED" Margin="17"  Stroke="Black" StrokeThickness="1">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label Foreground="Black" FontSize="24"  Grid.Column="1" Grid.Row="2" Margin="0,0,0,0" Content="LED显示系统" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Ellipse  Grid.Row="2" Grid.Column="5" x:Name="Checkbox_LaserK" Margin="17"  Stroke="Black" StrokeThickness="1">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label Foreground="Black" FontSize="24" Grid.Row="2" Grid.Column="4" Margin="0,0,0,0" Content="激光控制卡" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        <Ellipse  Grid.Row="1" Grid.Column="5" x:Name="Checkbox_Camera" Margin="17"  Stroke="Black" StrokeThickness="1">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label Foreground="Black" FontSize="24"  Grid.Column="4" Grid.Row="1" Margin="0,0,0,0" Content="视觉相机" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Label Foreground="Black" FontSize="24" Grid.Row="3" Margin="0,0,0,0" Content="激光测距仪" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                                        <Ellipse  Grid.Row="3" Grid.Column="2" x:Name="Checkbox_LRF" Margin="17"  Stroke="Black" StrokeThickness="1">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label Foreground="Black" FontSize="24" Grid.Row="3" Margin="0,0,0,0" Content="激光FPGA" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4"/>
+                                        <Ellipse  Grid.Row="3" Grid.Column="5" x:Name="Checkbox_FPGA" Margin="17"  Stroke="Black" StrokeThickness="1">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label x:Name="AngleLabel" FontFamily="Microsoft YaHei" Foreground="Black" FontSize="24" Grid.Row="6" Margin="0,0,82.2,0" Content="x:NaN y:NaN" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.ColumnSpan="3" Width="230" Grid.Column="2" Height="40"/>
+                                        <Label Foreground="Black" FontSize="24"  Grid.Column="1" Grid.Row="6" Margin="0,0,0,0" Content="机柜倾角" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        <Label Foreground="Black" FontSize="24" Grid.Row="4" Margin="0,0,0,0" Content="急停按钮" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1"/>
+                                        <Ellipse  Grid.Row="4" Grid.Column="2" x:Name="Emergency_Stop" Margin="17"  Stroke="Black" StrokeThickness="1" RenderTransformOrigin="0.611,2.177">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                                        			RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label Foreground="Black" FontSize="24" Grid.Row="4" Margin="0,0,0,0" Content="PBB连锁" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4"/>
+                                        <Ellipse  Grid.Row="4" Grid.Column="5" x:Name="BoardInterlock" Margin="17"  Stroke="Black" StrokeThickness="1">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                                        			RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label Foreground="Black" FontSize="24" Grid.Row="5" Margin="0,0,0,0" Content="PCA连锁" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Height="40"/>
+                                        <Ellipse  Grid.Row="5" Grid.Column="2" x:Name="PCA_Interlock" Margin="17"  Stroke="Black" StrokeThickness="1" RenderTransformOrigin="0.611,2.177">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                                        			RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Label Foreground="Black" FontSize="24" Grid.Row="5" Margin="0,0,0,0" Content="GPU连锁" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="4"/>
+                                        <Ellipse  Grid.Row="5" Grid.Column="5" x:Name="FGP400hz" Margin="17"  Stroke="Black" StrokeThickness="1">
+                                            <Ellipse.Fill>
+                                                <RadialGradientBrush
+                                        			RadiusX="1" RadiusY="1" >
+                                                    <GradientStop Color="YellowGreen" Offset="0" />
+                                                    <GradientStop Color="Red" Offset="1" />
+                                                </RadialGradientBrush>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </Grid>
+                                    
+
+                                </Grid>
+							</avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument CanClose="False" CanFloat="True"
+                                                       ContentId="document2" Title="激光设置界面">
+								<Border  Margin="0,0,0,0"  BorderBrush="#395984"  Width="1018" Height="715" >
+									<Border.Background>
+										<LinearGradientBrush >
+											<GradientBrush.GradientStops>
+												<GradientStopCollection>
+													<GradientStop Color="#A7A9B0" Offset="0.0"/>
+													<GradientStop Color="#323A52"  Offset="1.0"/>
+												</GradientStopCollection>
+											</GradientBrush.GradientStops>
+										</LinearGradientBrush>
+									</Border.Background>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*"/>
+											<ColumnDefinition Width="356"/>
+											<ColumnDefinition Width="284"/>
+										</Grid.ColumnDefinitions>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="1.4*"/>
+											<RowDefinition Height="*"/>
+											<RowDefinition Height="2.5*"/>
+										</Grid.RowDefinitions>
+                                                                         <Grid Margin="5,-2,10,0" Grid.Row="0" Grid.RowSpan="2" Background="#FFB8A5A5">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="5"/>
+												<RowDefinition Height="70"/>
+												<RowDefinition Height="15"/>
+												<RowDefinition Height="50"/>
+												<RowDefinition Height="5"/>
+												<RowDefinition Height="50"/>
+												<RowDefinition Height="5"/>
+												<RowDefinition Height="100"/>
+                                                                                                <RowDefinition Height="*"/>
+											</Grid.RowDefinitions>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*"/>
+												<ColumnDefinition Width="0.8*"/>
+												<ColumnDefinition Width="0.1*"/>
+											</Grid.ColumnDefinitions>
+                                           <TextBlock x:Name="Block1" TextWrapping="Wrap"  FontSize="21" 
+                                                       Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Visible" Margin="10,10,10,5" Grid.RowSpan="2"/>
+											<TextBlock x:Name="Block2"  TextWrapping="Wrap"  FontSize="18" 
+                                                       Grid.Row="3" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Visible"/>
+										</Grid>
+                                            <Grid Grid.Column="1" Grid.RowSpan="3"  Margin="3,0,7,10" Background="#FF898484">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="*"/>
+												<RowDefinition Height="39"/>
+												<RowDefinition Height="58"/>
+												<RowDefinition Height="48"/>
+												<RowDefinition Height="30"/>
+                                            <RowDefinition Height="10"/>
+											</Grid.RowDefinitions>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="*"/>
+												<ColumnDefinition Width="*"/>
+											</Grid.ColumnDefinitions>
+											<GroupBox x:Name="Group2d" Grid.Row="0" Grid.ColumnSpan="2" Margin="6,0,6,0"
+                                                                                                  BorderBrush="{x:Null}" Background="{x:Null}" FontFamily="微软雅黑">
+												<Border  x:Name="border2d" Width="322" Height ="466" Margin="0,-14,0,0" ClipToBounds="True">
+													<Image x:Name="Image2dBox"  Width="322" Height ="466" Margin="0,-14,0,0" RenderTransformOrigin="0.5,0.5"
+                                                            Cursor="Hand" MouseWheel="Image2dBox_MouseWheel"  MouseMove="Image2dBox_MouseMove" 
+                                                            ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                                            MouseLeftButtonDown="Image2dBox_MouseLeftButtonDown" MouseLeftButtonUp="Image2dBox_MouseLeftButtonUp"       
+                                                            MouseRightButtonDown="Image2dBox_MouseRightButtonDown" MouseRightButtonUp="Image2dBox_MouseRightButtonUp"
+                                                            ImageFailed="Image2dBox_ImageFailed"/>
+												</Border>
+											</GroupBox>
+                                            <Label x:Name="labelPosition" Grid.Row="1" Grid.ColumnSpan="2" Content="x:0 y:0" 
+                                                    VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Center" 
+                                                    Margin="-10,-20,1,1" Width="169" Height="37" />
+                                            <Button x:Name="button_Clc" Grid.Row="1" Grid.Column="1" FontSize="21"
+                                                    Height="auto" Width="auto"  Click="button_Clc_Click" 
+                                                    Margin="84,-20,7,10" Content="清屏"/>
+                                            <Controls:ToggleSwitch x:Name="Xaxiszoom" OffLabel="  X缩放关" OnLabel="  X缩放开"
+											   Grid.Row="2" Grid.Column="0" IsChecked="True" Margin="26,10,10,0" ContentDirection="RightToLeft" FontFamily="Microsoft YaHei"/>
+                                            <Controls:ToggleSwitch x:Name="Yaxiszoom" OffLabel="  Y缩放关" OnLabel="  Y缩放开"
+											   Grid.Row="2" Grid.Column="1" IsChecked="True" Margin="10,10,27,0" ContentDirection="RightToLeft" FontFamily="Microsoft YaHei"/>
+											<Button x:Name="button_Save" Click="button_Save_Click"  Grid.Row="3" Width="90" FontSize="21"
+                                                    Margin="22,-8,14,-15" Content="保存" Height="45" Padding="7,3,10,3"/>
+                                            <Button x:Name="button_Esc" Grid.Row="3" Grid.Column="1" Width="90"  Click="button_Esc_Click" FontSize="21"
+                                                    Margin="21,-8,29,-15" Content="退出" Height="45" Padding="3,7,10,3"/>
+										</Grid>
+										<Grid  Grid.Row="2" Grid.Column="0"  Margin="2,-20,8,7">
+											<Grid.Background>
+												<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+													<GradientStop Color="#FFAEAEAE" Offset="1"/>
+													<GradientStop Color="#FF6A7675" Offset="0.384"/>
+												</LinearGradientBrush>
+											</Grid.Background>
+											<Grid.RowDefinitions>
+												<RowDefinition Height="30"/>
+												<RowDefinition Height="30"/>
+												<RowDefinition Height="30"/>
+												<RowDefinition Height="*"/>
+											</Grid.RowDefinitions>
+											<Controls:NumericUpDown x:Name="XNumericUpDown" Minimum="1"  Maximum="50" Value="1" Interval="1"  
+															Grid.Row="3"  Margin="48,82,48,61" 
+															Height="34" Width="72"/>
+											<Button x:Name="button_2dScan0" Grid.Row="1"  Margin="-45,-20,102,25"   Click="button_2dScan_Click" 
+											Grid.RowSpan="2" Height="45" Width="110" FontSize="21" MouseRightButtonUp="button_2dScan0_MouseRightButtonUp">
+												<StackPanel Height="auto" Width="auto">
+                                                    <TextBlock Text="二维扫描" TextWrapping="WrapWithOverflow"/>
+												</StackPanel>
+											</Button>
+											<Button x:Name="button_Back0" Grid.Row="3" 
+                                                                                                Margin="130,-58,-24,180"  Click="button_Back0_Click" FontSize="21"
+                                                                                                 Height="45" Width="110">
+												<StackPanel Height="auto" Width="auto">
+                                                    <TextBlock x:Name="ForBack0_dis27" Text="回到零点" TextWrapping="WrapWithOverflow"/>
+												</StackPanel>
+											</Button>
+											<Button x:Name="button_RoughlyBack0" Grid.Row="3" FontSize="21"
+                                                                                                Margin="-45,-58,102,180"   Click="button_RoughlyBack0_Click" 
+                                                                                                Height="45" Width="110" MouseRightButtonUp="button_RoughlyBack0_MouseRightButtonUp">
+												<StackPanel Height="auto" Width="auto">
+                                                    <TextBlock Text="粗略回零" TextWrapping="WrapWithOverflow" RenderTransformOrigin="0.5,0.5">
+														<TextBlock.RenderTransform>
+															<TransformGroup>
+																<ScaleTransform/>
+																<SkewTransform/>
+																<RotateTransform Angle="1.11"/>
+																<TranslateTransform/>
+															</TransformGroup>
+														</TextBlock.RenderTransform>
+													</TextBlock>
+												</StackPanel>
+											</Button>
+											<Button x:Name="button_Set0" Grid.Row="1" Margin="130,-20,-24,25" Click="button_Set0_Click"  FontSize="21"
+											Content="置为零点" Grid.RowSpan="2" Height="45" Width="110" Padding="10,5"/>
+                                            <Ellipse  x:Name="shine_test"  Grid.Row="3" Margin="10,207,322,45"  Stroke="Black" StrokeThickness="1" RenderTransformOrigin="0.766,1.25">
+                                                <Ellipse.Fill>
+                                                    <RadialGradientBrush
+                                                        RadiusX="1" RadiusY="1" >
+                                                        <GradientStop Color="Green" Offset="1" />
+                                                    </RadialGradientBrush>
+                                                </Ellipse.Fill>
+                                            </Ellipse>
+                                            <ec:PathListBox Margin="39,80.25,31,74" Grid.Row="3">
+												<ec:PathListBox.LayoutPaths>
+													<ec:LayoutPath SourceElement="{Binding ElementName=ellipse}" Distribution="Even"/>
+												</ec:PathListBox.LayoutPaths>
+												<Button x:Name="button_RightMove" Style="{DynamicResource MetroCircleButtonStyle}"
+                                                        Height="58"  Click="Click_appbar_arrow_right"
+                                                        Width="58"    ToolTip="向右移动激光扫面区域"
+                                                        VerticalAlignment="Top">
+													<Rectangle Width="20"
+                                                               Height="20">
+														<Rectangle.Fill>
+															<VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_arrow_right}" />
+														</Rectangle.Fill>
+													</Rectangle>
+												</Button>
+												<Button  x:Name="button_DownMove" Style="{DynamicResource MetroCircleButtonStyle}"
+                                                         Height="58"  Click="Click_appbar_arrow_down"
+                                                         Width="58"    ToolTip="向下移动激光扫面区域"
+                                                         VerticalAlignment="Top" >
+													<Rectangle Width="20"
+                                                               Height="20">
+														<Rectangle.Fill>
+															<VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_arrow_down}" />
+														</Rectangle.Fill>
+													</Rectangle>
+												</Button>
+												<Button  x:Name="button_LeftMove"  Style="{DynamicResource MetroCircleButtonStyle}"
+                                                         Height="58"  Click="Click_appbar_arrow_left"
+                                                         Width="58"    ToolTip="向左移动激光扫面区域"
+                                                         VerticalAlignment="Top" Background="{x:Null}">
+													<Rectangle Width="20"
+										Height="20">
+														<Rectangle.Fill>
+															<VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_arrow_left}" />
+														</Rectangle.Fill>
+													</Rectangle>
+												</Button>
+												<Button x:Name="button_UpMove"  Style="{DynamicResource MetroCircleButtonStyle}"
+                                                        Height="58"  Click="Click_appbar_arrow_Up"
+                                                        Width="58"   ToolTip="向上移动激光扫面区域"
+                                                        VerticalAlignment="Top">
+													<Rectangle Width="20"
+										Height="20">
+														<Rectangle.Fill>
+															<VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_arrow_up}" />
+														</Rectangle.Fill>
+													</Rectangle>
+												</Button>
+											</ec:PathListBox>
+											<Ellipse x:Name="ellipse" HorizontalAlignment="Stretch"  Height="130" 
+											 Margin="0,90,0,0" Grid.Row="3" VerticalAlignment="Top" Width="130"/>
+										</Grid>
+                                        <Controls:MetroTabControl x:Name="SetTabControl"  Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="#FF898484">
+                                            <Controls:MetroTabItem x:Name="Tab1" Header=" 标定 " Visibility="Visible">
+                                                    <Grid Margin="5,0,0,0">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="10"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="98"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Button x:Name="button_ConfirmRect" Grid.Row="4" Margin="30,10"
+													Click="button_ConfirmRect_Click" Grid.ColumnSpan="2" >
+                                                            <StackPanel Height="auto" Width="auto" HorizontalAlignment="Center" >
+                                                            <TextBlock x:Name="ForConfirmRect31" FontSize="24" Text="确认边框" TextWrapping="WrapWithOverflow"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                    <Button x:Name="button_stationScan" Grid.Row="3" 
+								                            Margin="30,10" Click="button_stationScan_Click"  MouseRightButtonUp="button_stationScan_RightClick">
+                                                        <StackPanel Height="auto" Width="auto" HorizontalAlignment="Center" >
+                                                            <TextBlock  FontSize="24" Text="站坪扫描" TextWrapping="WrapWithOverflow"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                    <Button x:Name="button_AutoCalibration" 
+													Grid.Row="1" 
+													Click="button_AutoCalibration_Click" Margin="30,10" >
+                                                            <StackPanel Height="auto" Width="auto" HorizontalAlignment="Center" >
+                                                            <TextBlock x:Name="ForAutoCalibration29" FontSize="24" Text="水平标定" TextWrapping="WrapWithOverflow"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                    <Button x:Name="button_VerticalCalibration" 
+													Grid.Row="2" Margin="30,10" 
+													Click="button_VerticalCalibration_Click" >
+                                                            <StackPanel Height="auto" Width="auto" HorizontalAlignment="Center" >
+                                                            <TextBlock x:Name="ForVerticalCalibration30"  FontSize="24"  Text="垂直标定" TextWrapping="WrapWithOverflow"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                    <Button x:Name="AngleSetZeroButton" 
+													Grid.Row="5" Margin="30,10" 
+													Click="AngleSetZeroButton_Click" >
+                                                        <StackPanel Height="auto" Width="auto" HorizontalAlignment="Center" >
+                                                            <TextBlock x:Name="ForAngleSetZero32"  FontSize="24"  Text="倾角检测器置零" TextWrapping="WrapWithOverflow"/>
+                                                        </StackPanel>
+                                                    </Button>
+                                                    <Label x:Name="AngleLabelLaserPanel" FontFamily="Microsoft YaHei" Foreground="Black" FontSize="24" Grid.Row="6" Margin="0,0,0,1" Content="x:NaN y:NaN" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                                </Grid>
+                                                </Controls:MetroTabItem>
+                                            <Controls:MetroTabItem x:Name="Tab2" Header="引导线" Visibility="Visible" Margin="13,0,0,0" Width="100">
+                                                    <Grid Margin="5,0,0,0">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="65"/>
+                                                            <RowDefinition Height="65"/>
+                                                            <RowDefinition Height="65"/>
+                                                            <RowDefinition Height="45"/>
+                                                            <RowDefinition Height="65"/>
+                                                            <RowDefinition Height="60"/>
+                                                            <RowDefinition Height="60"/>
+                                                            <RowDefinition Height="50"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="0.6*"/>
+                                                            <ColumnDefinition Width="0.6*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Button x:Name="button_WalkSet" Grid.Row="0" 
+													            Grid.Column="0" Grid.ColumnSpan="3" 
+													            Margin="15,10,25,10" Click="button_WalkSet_Click" 
+													            Content="走步设置" FontSize="21"/>
+                                                    <Button x:Name="button_WalkTest" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  ToolTip="开始走步设置"
+													            Margin="15,10,25,10" Click="button_WalkTest_Click"
+													            Content="走步测试" FontSize="21"/>
+                                                        <Button x:Name="button_WalkStop" Grid.Row="0"
+													            Grid.Column="3"  Margin="-13,10,16,10" Click="button_WalkStop_Click" 
+													            Content="停止" FontSize="21"/>
+                                                    <Button x:Name="button_WalkConfirm" Grid.Row="1"  ToolTip="确认走步设置"
+													            Grid.Column="3" Margin="-13,10,16,10" Click="button_WalkConfirm_Click"
+													            Content="确认" FontSize="21"/>
+                                                        <Button x:Name="button_WalkDelete" Grid.Row="2"   FontSize="21"
+													            Grid.Column="3" Margin="-13,10,16,10" Click="button_WalkDelete_Click" 
+													            Content="清空" RenderTransformOrigin="0.5,-0.108" />
+                                                    <Button x:Name="button_WalkNum" Grid.Row="2"  ToolTip="对走步设置引导线编号"
+													            Grid.Column="0" Grid.ColumnSpan="3" 
+													            Margin="15,10,25,10" Click="button_WalkNum_Click" 
+													            Content="编号"  FontSize="21"/>
+                                                        <Label  x:Name="Fordependcystopline" Grid.Row="3" Grid.ColumnSpan="2" 
+												                Content="停止线" 
+												                Height="50" Width="90" FontSize="21" Margin="17,0,0,0"/>
+                                                    <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="18" x:Name="Stop_Y" Margin="30,0,16,0" Height="38" TextChanged="Move_TextChanged" KeyDown="Move_KeyDown"/>
+                                                    <ComboBox  Grid.Row="5" Grid.Column="3" SelectedIndex="0"  Height="38" x:Name="drpModel" Margin="0,0,10,0"/>
+                                                    <ComboBox Grid.Row="6" Grid.Column="3" FontSize="18" x:Name="fuckModel" Height="38"  Margin="0,0,10,0"/>
+                                                    <Button x:Name="button_ModelGuide" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" ToolTip="输入飞机型号"
+													            Height="auto" Width="auto" Margin="10,10,10,0" Click="button_ModelGuide_Click" FontSize="18"                                                     >
+                                                            <StackPanel Height="auto" Width="auto">
+                                                            <TextBlock Text="由机型读取引导线" TextWrapping="WrapWithOverflow"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                    <Button x:Name="button_NumberGuide" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3"  ToolTip="输入引导线停止线编号"
+													            Height="auto" Width="auto" Margin="10,10,10,0" Click="button_NumberGuide_Click" FontSize="18" >
+                                                            <StackPanel Height="auto" Width="auto">
+                                                            <TextBlock Text="由编号读取引导线" TextWrapping="WrapWithOverflow"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                        <Button x:Name="button_TestConfirmPoint" Width="auto" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"  Margin="38.561,10,38,10" 
+												 FontSize="21" Click="button_TestConfirmPoint_Click">
+                                                            <StackPanel Height="auto" Width="auto">
+                                                            <TextBlock Text="验证停止点" TextWrapping="WrapWithOverflow"/>
+                                                            </StackPanel>
+                                                        </Button>
+                                                    </Grid>
+                                            </Controls:MetroTabItem>
+                                            <Controls:MetroTabItem x:Name="Tab3" Header="更多" Visibility="Visible" Margin="15,0,0,0" Width="84">
+                                                    <Grid  Grid.Row="1" Grid.RowSpan="2" Margin="10,6,17,6">
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="10"/>
+                                                            <RowDefinition Height="70"/>
+                                                            <RowDefinition Height="70"/>
+                                                            <RowDefinition Height="70"/>
+                                                            <RowDefinition Height="70"/>
+                                                            <RowDefinition Height="70"/>
+                                                            <RowDefinition Height="70"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Button x:Name="button_Proof" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="30,5" Click="button_Proof_Click"
+                                                                Content="校准" FontSize="21"/>
+                                                        <Button x:Name="button_ReadRect" Grid.Row="2" 
+                                                                Grid.Column="0" Grid.ColumnSpan="2" Margin="30,5" Click="button_ReadRect_Click"
+                                                                Content="读取边框" FontSize="21"/>
+                                                        <Button x:Name="button_PointMeasure" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                                Margin="30,5" Click="button_PointMeasure_Click" FontSize="21"
+                                                                Content="单点测量" />
+                                                        
+                                                        <Button x:Name="button_OpenRed" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="30,5" 
+                                                                Click="button_OpenRed_Click" Content="打开红色激光" FontSize="21"/>
+                                                        <Button x:Name="button_CloseRed" Grid.Row="6" Grid.Column="0" Click="button_CloseRed_Click"  
+                                                                Grid.ColumnSpan="2" Margin="30,5" Content="关闭红色激光" FontSize="21"/>
+                                                        <Button x:Name="button_WindowScan" Grid.Row="3" 
+                                                                Grid.Column="0" Grid.ColumnSpan="2" FontSize="21"
+                                                                Margin="30,5" Click="button_WindowScan_Click"
+                                                                Content="窗口扫描" />
+                                                    </Grid>
+                                                </Controls:MetroTabItem>
+                                            <Controls:MetroTabItem x:Name="Tab4" Header="编号" Visibility="Collapsed">
+                                                    <Border Width="243" Height="Auto"
+                                                            BorderThickness="1"
+                                                            CornerRadius="20,20,20,20" >
+                                                        <Grid Width="241">
+                                                            <Grid.Resources>
+                                                                <Style TargetType="{x:Type TextBlock}">
+                                                                    <Setter Property="FontSize" Value="16"/>
+                                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                                </Style>
+                                                            </Grid.Resources>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="50"/>
+                                                                <RowDefinition Height="30"/>
+                                                                <RowDefinition Height="30"/>
+                                                                <RowDefinition Height="30"/>
+                                                                <RowDefinition Height="1.5*"/>
+                                                                <RowDefinition Height="80"/>
+                                                                <RowDefinition Height="*"/>
+                                                            </Grid.RowDefinitions>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="75"/>
+                                                                <ColumnDefinition Width="*"/>
+                                                            </Grid.ColumnDefinitions>
+
+                                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="引导线:" />
+                                                        <TextBlock Text="停止线:" Grid.Row="2" Grid.Column="0"/>
+                                                        <TextBlock Grid.Row="3" Text="距离"/>
+                                                            <TextBox x:Name="drpdistance" Grid.Row="3" Grid.Column="1" Margin="0,0,25,0" 
+                                                                     Controls:TextBoxHelper.ClearTextButton="True"   
+                                                                     KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged"/>
+                                                            <ComboBox x:Name="drpGuide" Grid.Row="1" Grid.Column="1" Height="30" Margin="0,0,25,0" ItemsSource="{StaticResource GuideNum}"
+                                                                  DisplayMemberPath="Guide" SelectedValuePath="Guide" SelectedIndex="0"/>
+                                                            <ComboBox x:Name="drpStop" Grid.Row="2" Grid.Column="1" Height="30" Margin="0,0,25,0" ItemsSource="{StaticResource StopNum}" 
+                                                                  DisplayMemberPath="Stop" SelectedValuePath="Stop" SelectedIndex="0"/>
+
+                                                            <Grid Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Text="引导线:" HorizontalAlignment="Left" Width="64" />
+                                                                <TextBlock Grid.Column="1" Width="60"
+                                                                       Text="{Binding ElementName=drpGuide,Path=SelectedValue}"/>
+
+                                                            <TextBlock Grid.Row="1" Text="停止线:"/>
+                                                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="NumStop" Width="60"
+                                                                       Text="{Binding ElementName=drpStop,Path=SelectedValue}"/>
+                                                            <TextBlock Text="捕获距离" Grid.Row="2" HorizontalAlignment="Left" Width="64" />
+                                                            <TextBlock Grid.Row="2" Grid.Column="1" Width="60" Text="{Binding ElementName=drpdistance,Path=Text}"/>
+                                                            <TextBlock Grid.Row="2" Grid.Column="2" Text="mm"/>
+                                                        </Grid>
+                                                            <Grid Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center"></Grid>
+                                                            <Button VerticalAlignment="Top" HorizontalAlignment="Center"
+                                                                    Padding="10"  Height="46" Margin="-40,0,121,0" Width="65" 
+                                                                    FontSize="14" Grid.Column="1" Grid.Row="5" Click="button_OK_Click" Content="确定"/>
+                                                            <Button VerticalAlignment="Top" HorizontalAlignment="Center" Padding="10"  
+                                                                    Height="46" Margin="68,0,35,0" Width="65" FontSize="14" 
+                                                                    Grid.Column="1" Grid.Row="5" Click="button_Close_Click" Content="关闭"/>
+                                                        </Grid>
+                                                    </Border>
+                                                </Controls:MetroTabItem>
+                                            </Controls:MetroTabControl>
+                                        <Grid Grid.Row="0" Grid.Column="2"  Background="#FF898484">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="5"/>
+												<RowDefinition Height="40"/>
+												<RowDefinition Height="5"/>
+												<RowDefinition Height="40"/>
+												<RowDefinition Height="5"/>
+												<RowDefinition Height="40"/>
+												<RowDefinition Height="5"/>
+												<RowDefinition Height="40"/>
+											</Grid.RowDefinitions>
+											<Grid.ColumnDefinitions>
+												<ColumnDefinition Width="0.4*"/>
+												<ColumnDefinition Width="0.5*"/>
+											</Grid.ColumnDefinitions>
+											<TextBlock Grid.Row="1" Grid.Column="0" FontSize="18" Margin="0,6,0,0" 
+							                            Text="安装高度(mm)" TextWrapping="Wrap"/>
+											<TextBox Grid.Row="1" Grid.Column="1" x:Name="Install_height" 
+								                     Controls:TextBoxHelper.ClearTextButton="True"   FontSize="18"
+								                     KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged"/>
+											<TextBlock Grid.Row="3" Grid.Column="0" FontSize="18" Margin="0,6,0,0" 
+							                           Text="对象高度(mm)" TextWrapping="Wrap"/>
+											<TextBox Grid.Row="3" Grid.Column="1" x:Name="Object_height" 
+								                     Controls:TextBoxHelper.ClearTextButton="True"   FontSize="18"
+								                     KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged"/>
+											<TextBlock Grid.Row="5" Grid.Column="0" FontSize="18" Margin="0,6,0,0" 
+							                           Text="对象距离(mm)" TextWrapping="Wrap"/>
+											<TextBox Grid.Row="5" Grid.Column="1" x:Name="Object_distance" 
+								                     Controls:TextBoxHelper.ClearTextButton="True"  FontSize="18"
+								                     KeyDown="Move_KeyDown" TextChanged="Move_TextChanged" />
+											<TextBlock Grid.Row="7" Grid.Column="0" FontSize="18" Margin="0,6,0,0" 
+							                           Text="垂直步数(1/32)" TextWrapping="Wrap"/>
+											<TextBox Grid.Row="7" Grid.Column="1" x:Name="edit_StandHigh" 
+								                     Controls:TextBoxHelper.ClearTextButton="True"  FontSize="18"
+								                     KeyDown="Move_KeyDown" TextChanged="Move_TextChanged"/>
+										</Grid>
+										<Path Grid.Column="1" Data="M891.5,384" Fill="#FFF4F4F5" HorizontalAlignment="Left" 
+                                              Height="1" Margin="439.326,4.833,-92.5,0" Grid.Row="2" Stretch="Fill" Stroke="Black" 
+                                              VerticalAlignment="Top" Width="1"/>
+                                    </Grid>
+                                </Border>
+							</avalonDock:LayoutDocument>
+                            <avalonDock:LayoutDocument CanClose="False" CanFloat="True"  ContentId="document3" Title="记录查询">
+                                <Grid Background="#F5F2F5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="80"/>
+                                        <RowDefinition Height="30"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="195"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="122,29,607,25" Content="设置日期范围"/>
+                                    <Label Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,10,695,0" Content="泊位记录文件列表"/>
+                                    <DatePicker  x:Name="datePicker1" Margin="-200,0,0,0" Width="150" Height="25"
+                                                 SelectedDateFormat="Long" FirstDayOfWeek="Monday"
+                                                 IsTodayHighlighted="False" SelectedDateChanged="datePicker_SelectedDateChanged">
+                                        <DatePicker.BlackoutDates>
+                                            <CalendarDateRange Start="2010/4/3" End="2010/4/5"/>
+                                            <CalendarDateRange Start="2010/4/10" End="2010/4/12"/>
+                                        </DatePicker.BlackoutDates>
+                                    </DatePicker>
+                                    <Label Content="至" FontSize="18" Width="30" Height="30" Margin="10,0,0,0"/>
+                                    <DatePicker x:Name="datePicker2" Margin="220,0,0,0" Width="150" Height="25"
+                                                SelectedDateFormat="Long" FirstDayOfWeek="Monday"
+                                                IsTodayHighlighted="True" SelectedDateChanged="datePicker_SelectedDateChanged">
+                                        <DatePicker.BlackoutDates>
+                                            <CalendarDateRange Start="2010/4/3" End="2010/4/5"/>
+                                            <CalendarDateRange Start="2010/4/10" End="2010/4/12"/>
+                                        </DatePicker.BlackoutDates>
+                                    </DatePicker>
+                                    <Button Grid.Row="1" Margin="-250,-20,0,0" Content="当日日志" Width="100" Height="30" Click="Today"/>
+                                    <Button Grid.Row="1" Margin="0,-20,0,0" Content="7日内日志" Width="100" Height="30"  Click="Sevendays"/>
+                                    <Button Grid.Row="1" Margin="250,-20,0,0" Content="30日内日志" Width="100" Height="30"  Click="Thirtydays"/>
+                                    <Label Margin="10,10,0,0" Grid.Row="2">关键字查找</Label>
+                                    <TextBox Grid.Row="2" Margin="86,8,15,0" TextChanged="TextBox_TextChanged"/>
+                                    <ListView Grid.Row="3" Margin="15,41,15,15" Name="lstProducts" MouseDoubleClick="lstProducts_MouseDoubleClick">
+                                        <ListView.View>
+                                            <GridView  AllowsColumnReorder="True">
+                                                <GridView.Columns >
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Path=TTime}" Header="时间" Width="295">
+                                                    </GridViewColumn>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Path=PPort}" Header="机位" Width="295">
+                                                    </GridViewColumn>
+                                                    <GridViewColumn DisplayMemberBinding="{Binding Path=TType}" Header="机型" Width="295">
+                                                    </GridViewColumn>
+                                                </GridView.Columns>
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </Grid>
+                            </avalonDock:LayoutDocument>
+                        </avalonDock:LayoutDocumentPane>
+					</avalonDock:LayoutDocumentPaneGroup>
+				</avalonDock:LayoutPanel>
+                
+				<avalonDock:LayoutRoot.BottomSide>
+					<avalonDock:LayoutAnchorSide>
+						<avalonDock:LayoutAnchorGroup>
+                            <avalonDock:LayoutAnchorable x:Name="XBottomSide" FloatingHeight="666" FloatingWidth="960" 
+														 Title="视觉标定" CanAutoHide="True" ContentId="AutoHide1Content" CanHide="False" 
+														 CanClose="False" AutoHideWidth="960" AutoHideHeight="450" 
+														 AutoHideMinHeight="300" FloatingLeft="190" FloatingTop="190" AutoHideMinWidth="500" >
+                                <Grid  ClipToBounds="True" Width="Auto" Height="Auto"  Margin="0,0,0,0">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="170"/>
+                                    </Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*"/>
+										<RowDefinition Height="40"/>
+									</Grid.RowDefinitions>
+									<WrapPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                                        <GroupBox Name="Group2" Margin="0,0,0,4" BorderBrush="{x:Null}" Background="{x:Null}" 
+													 FontSize="12" FontFamily="微软雅黑">
+                                            <Border  Name="border" Width="725" Height ="545" Margin="0,0,0,0">
+                                                <Image Name="CameraImageBox" Width="720" Height ="540"  Margin="0,0,0,0"
+														  RenderTransformOrigin="0.5,0.5" MouseLeftButtonDown="CameraImageBox_MouseLeftButtonDown"
+														  MouseLeftButtonUp="CameraImageBox_MouseLeftButtonUp" MouseMove="CameraImageBox_MouseMove" Cursor="Hand" 
+														  MouseWheel="CameraImageBox_MouseWheel" ScrollViewer.HorizontalScrollBarVisibility="Auto"
+														  ScrollViewer.VerticalScrollBarVisibility="Visible"  MouseRightButtonDown="CameraImageBox_MouseRightButtonDown" 
+														  MouseRightButtonUp="CameraImageBox_MouseRightButtonUp" ContextMenuOpening="ContextMenu_Opened">
+                                                    <Image.ContextMenu>
+                                                        <ContextMenu x:Name="XContextMenu"  Style="{StaticResource MyContextMenu}" StaysOpen="False" 
+																	 IsOpen="False" Opened="ContextMenu_Opened" Visibility="Collapsed" Closed="ContextMenu_Closed">
+                                                            <Separator Opacity="0.4"></Separator>
+                                                            <MenuItem x:Name="MenuGuide" Header="引导线编号" 
+																	   Width="150" Click="MenuGuide_Click"/>
+                                                            <MenuItem x:Name="MenuStop" Header="停止线编号" 
+																	   Width="150" Click="MenuStop_Click"/>
+                                                            <MenuItem x:Name="MenuDelete" Header="删除选线" 
+																	   Width="150" Click="MenuDelete_Click">
+                                                            </MenuItem>
+                                                            <Separator Opacity="0.4" ></Separator>
+                                                            <MenuItem x:Name="MenuWidth" Header="线条宽度" 
+																	   Width="150" Click="MenuWidth_Enter"/>
+                                                            <MenuItem x:Name="MenuColor" Header="选线颜色" 
+																	   Width="150" Click="MenuColor_Enter"/>
+                                                        </ContextMenu>
+                                                    </Image.ContextMenu>
+                                                </Image>
+                                            </Border>
+                                        </GroupBox>
+									</WrapPanel>
+                                    <Button Style="{DynamicResource MetroCircleButtonStyle}"
+                                                Margin="10,10,0,-5" VerticalAlignment="Top" HorizontalAlignment="Left"   Click="refresh_up_Click"
+                                                Width="30" Height="30" RenderTransformOrigin="0.5,0.5">
+                                        <Rectangle Width="20"
+                                                       Height="20">
+                                            <Rectangle.Fill>
+                                                <VisualBrush Stretch="Fill"
+                                                                 Visual="{StaticResource appbar_magnify_back}" />
+                                            </Rectangle.Fill>
+                                        </Rectangle>
+                                    </Button>
+                                    <ScrollViewer Grid.Row="0" Grid.Column="1">
+                                        <StackPanel  x:Name="TI5" Width="170" Visibility="Collapsed"  Margin="0,0,0,0" Opacity="0.85" Background="#C8C8D3">
+                                            <WrapPanel x:Name="WrapPanel1" Width="150" >
+                                                <Button   MinHeight="60" MaxHeight="120" Margin="0,5,10,5" Click="button_midline_Click"
+                                                          Background="#FFC7AFAF" Width="150">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock x:Name="midlinetext" Foreground="DarkRed" TextWrapping="WrapWithOverflow" Text="显示基准线"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button   MinHeight="60" MaxHeight="120" Margin="0,5,10,5" Click="button_ConfirmGuideLine_Click"
+                                                          Background="#FFC7AFAF" Width="150">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock Foreground="DarkRed"   TextWrapping="WrapWithOverflow" Text="绘制引导线"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <WrapPanel x:Name="WrapPanel2" Margin="0,0,10,0" Width="150" Height="auto" Visibility="Collapsed">
+                                                    <WrapPanel.Triggers>
+                                                        <EventTrigger RoutedEvent="WrapPanel.Loaded">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation
+                                                                            Storyboard.TargetName="WrapPanel2" 
+                                                                            Storyboard.TargetProperty="Opacity"
+                                                                            From="0.0" To="1.0" Duration="0:0:2" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </WrapPanel.Triggers>
+                                                    <Grid Width="150">
+                                                        <Grid.Resources>
+                                                            <Style TargetType="{x:Type TextBlock}">
+                                                                <Setter Property="FontSize" Value="16"/>
+                                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                            </Style>
+                                                        </Grid.Resources>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="20"/>
+                                                            <RowDefinition Height="30"/>
+                                                            <RowDefinition Height="30"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="80"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="75"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Margin="1" Padding="5"></TextBlock>
+                                                        <TextBlock x:Name="ForDependencyGL" Grid.Row="1" Grid.Column="0" Text="引导线" />
+                                                        <ComboBox x:Name="newcombobox" Grid.Row="1" Grid.Column="1" 
+                                                                      Height="30" Margin="0,0,5,0" SelectedValue="1" />
+                                                        <Grid Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Text="引导线:"/>
+                                                            <TextBlock Grid.Column="1" Text="{Binding ElementName=newcombobox,Path=SelectedValue,Mode=TwoWay}"/>
+                                                        </Grid>
+                                                        <Button VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                                                    Padding="10"  Height="46"   Style="{DynamicResource SquareButtonStyle}"
+                                                                    Margin="-75,19,80,0" Width="61" FontSize="14" Grid.Column="1" Grid.Row="4" Click="Button_DrawGuideLine_Click" Content="绘制"/>
+                                                        <Button VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                                                    Padding="10"  Height="46"  Style="{DynamicResource SquareButtonStyle}"
+                                                                    Margin="0,19,5,0" Width="60" FontSize="14" Grid.Column="1" Grid.Row="4" Click="DrawGuideLine_Close" Content="关闭"/>
+                                                    </Grid>
+                                                </WrapPanel>
+                                                <Button  MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Click="button_ConfirmStopLine_Click"   Background="#FFC7AFAF" Width="150">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock Foreground="DarkRed"  TextWrapping="WrapWithOverflow" Text="绘制停止线"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <WrapPanel x:Name="WrapPanel3" Margin="0,0,10,0" Width="150" Height="auto" Visibility="Collapsed">
+                                                    <WrapPanel.Triggers>
+                                                        <EventTrigger RoutedEvent="WrapPanel.Loaded">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation
+                                                                            Storyboard.TargetName="WrapPanel2" 
+                                                                            Storyboard.TargetProperty="Opacity"
+                                                                            From="0.0" To="1.0" Duration="0:0:2" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </WrapPanel.Triggers>
+                                                    <Grid Width="150">
+                                                        <Grid.Resources>
+                                                            <Style TargetType="{x:Type TextBlock}">
+                                                                <Setter Property="FontSize" Value="16"/>
+                                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                            </Style>
+                                                        </Grid.Resources>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="20"/>
+                                                            <RowDefinition Height="30"/>
+                                                            <RowDefinition Height="30"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="80"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="75"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Margin="1" Padding="5"></TextBlock>
+                                                        <TextBlock x:Name="StoplineGL" Grid.Row="1" Grid.Column="0" Text="引导线" />
+                                                        <TextBlock x:Name="StoplineSL" Grid.Row="2" Grid.Column="0" Text="停止线" />
+                                                        <ComboBox x:Name="newcombobox2A" Grid.Row="1" Grid.Column="1" 
+                                                                      Height="30" Margin="0,0,5,0"  SelectedValue="1"/>
+                                                        <ComboBox x:Name="newcombobox2B" Grid.Row="2" Grid.Column="1" 
+                                                                      Height="30" Margin="0,0,5,0"  SelectedValue="1"/>
+                                                        <Grid Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Text="引导线:"/>
+                                                            <TextBlock Grid.Column="1" Text="{Binding ElementName=newcombobox2A,Path=SelectedValue,Mode=TwoWay}"/>
+                                                            <TextBlock Grid.Row="1" Text="停止线:"/>
+                                                            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=newcombobox2B,Path=SelectedValue,Mode=TwoWay}"/>
+                                                        </Grid>
+                                                        <Button VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                                                    Padding="10"  Height="46" Style="{DynamicResource SquareButtonStyle}"
+                                                                    Margin="-70,19,80,0" Width="61" FontSize="14" Grid.Column="1" Grid.Row="4" 
+                                                                Click="Button_DrawStopLine2B" Content="绘制"/>
+                                                        <Button VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                                                    Padding="10"  Height="46" Style="{DynamicResource SquareButtonStyle}"
+                                                                    Margin="0,19,5,0" Width="60" FontSize="14" Grid.Column="1" Grid.Row="4" 
+                                                                Click="DrawStopLine_Close" Content="关闭"/>
+                                                    </Grid>
+                                                </WrapPanel>
+                                                <Button  MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Background="#FFC7AFAF" Width="150" Click="button_AddRect_Click">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <Label Foreground="DarkRed"  x:Name="label_DrawRect" Content="绘制选框" VerticalContentAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <WrapPanel x:Name="WrapPanel6" Width="150" Margin="0,0,10,0"  Height="auto" Visibility="Collapsed">
+                                                    <WrapPanel.Triggers>
+                                                        <EventTrigger RoutedEvent="WrapPanel.Loaded">
+                                                            <BeginStoryboard>
+                                                                <Storyboard>
+                                                                    <DoubleAnimation
+                                                                            Storyboard.TargetName="WrapPanel2" 
+                                                                            Storyboard.TargetProperty="Opacity"
+                                                                            From="0.0" To="1.0" Duration="0:0:2" />
+                                                                </Storyboard>
+                                                            </BeginStoryboard>
+                                                        </EventTrigger>
+                                                    </WrapPanel.Triggers>
+                                                    <Grid Width="150">
+                                                        <Grid.Resources>
+                                                            <Style TargetType="{x:Type TextBlock}">
+                                                                <Setter Property="FontSize" Value="16"/>
+                                                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                                            </Style>
+                                                        </Grid.Resources>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="20"/>
+                                                            <RowDefinition Height="30"/>
+                                                            <RowDefinition Height="30"/>
+                                                            <RowDefinition Height="*"/>
+                                                            <RowDefinition Height="80"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="75"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Margin="1" Padding="5"></TextBlock>
+                                                        <TextBlock Grid.Row="1" Grid.Column="0" Text="绘制选框" />
+                                                        <ComboBox x:Name="newcombobox3"  Grid.Row="1" Grid.Column="1" 
+                                                                      Height="30" Margin="0,0,5,0"  SelectedIndex="0"/>
+                                                        <Grid Grid.Row="3" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                                <ColumnDefinition/>
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto"/>
+                                                                <RowDefinition Height="Auto"/>
+                                                            </Grid.RowDefinitions>
+                                                            <TextBlock Text="边框:"/>
+                                                            <TextBlock x:Name="tbDrawRect" Grid.Column="1" Text="{Binding ElementName=newcombobox3,Path=SelectedValue,Mode=TwoWay}"/>
+                                                        </Grid>
+                                                        <Button VerticalAlignment="Top" HorizontalAlignment="Center"
+                                                                    Padding="10"  Height="46" Style="{DynamicResource SquareButtonStyle}"
+                                                                    Margin="-70,19,80,0" Width="61" FontSize="14" Grid.Column="1" Grid.Row="4" Click="button_DrawRect_Click" Content="绘制"/>
+                                                        <Button VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                                                    Padding="10"  Height="46"  Style="{DynamicResource SquareButtonStyle}"                                                            
+                                                                    Margin="0,19,5,0" Width="60" FontSize="14" Grid.Column="1" Grid.Row="4" Click="DrawRect_Close" Content="关闭"/>
+                                                    </Grid>
+                                                </WrapPanel>
+                                                <Button MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Background="#FFC7AFAF" Width="150" Click="button_InsertMarkpoint_Click">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock x:Name="label_InsertMarkpoint"  TextWrapping="WrapWithOverflow"
+                                                                    Foreground="DarkRed"    Text="插入标志点"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Background="#FFC7AFAF" Width="150" Click="button_Delete_Click">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock Foreground="DarkRed" TextWrapping="WrapWithOverflow" Text="单个删除"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button  MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Background="#FFC7AFAF" Width="150" Click="button_Clear_Click">
+                                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                                        <Label Foreground="DarkRed"  Content="全部删除" VerticalContentAlignment="Center" RenderTransformOrigin="2.74,0.684" />
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button  MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Background="#FFC7AFAF" Width="150" Click="button_Recover_Click">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock Foreground="DarkRed" TextWrapping="WrapWithOverflow" Text="恢复"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button x:Name="button_SaveVideoSet"  MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Background="#FFC7AFAF" Width="150" Click="button_SaveVideoSet_Click">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock Foreground="DarkRed" TextWrapping="WrapWithOverflow"  Text="保存设置" RenderTransformOrigin="2.74,0.684" />
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Background="#FFC7AFAF" Width="150" Click="button_SaveAndEsc_Clcik">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="DarkRed" 
+                                                                   Text="保存并退出"/>
+                                                    </StackPanel>
+                                                </Button>
+                                                <Button MinHeight="60" MaxHeight="120"  Margin="0,0,10,5"
+                                                            Background="#FFC7AFAF" Width="150" Click="button_nowSaveAndEsc_Clcik">
+                                                    <StackPanel Width="auto" Height="auto">
+                                                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="DarkRed" 
+                                                                   Text="退出"/>
+                                                    </StackPanel>
+                                                </Button>
+                                            </WrapPanel>
+                                            <WrapPanel  Margin="0,0,10,0" x:Name="WrapPanel4" Width="150" Visibility="Collapsed">
+                                                <TextBlock Width="150" FontSize="14" Margin="5,20,5,20" Text="线段颜色"/>
+                                                <xctk:ColorPicker SelectedColorChanged="ColorPickerSChange" SelectedColor="#FFECEC18" x:Name="XColorPicker" Margin="5" VerticalAlignment="Top">
+                                                </xctk:ColorPicker>
+                                                <Button VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                                                    Padding="10"  Height="46"  Style="{DynamicResource SquareButtonStyle}"                                                            
+                                                                    Margin="70,19,0,0" Width="60" FontSize="14" Click="WrapPanel4_Close" Content="关闭"/>
+                                            </WrapPanel>
+                                            <WrapPanel Margin="0,0,10,0"  x:Name="WrapPanel5" Height="300" Width="150" Visibility="Collapsed">
+                                                <TextBlock Width="150"  FontSize="14" Margin="5,20,5,20" Text="线段宽度"/>
+                                                <Slider x:Name="XSlider"  Minimum="1" Maximum="10" Value="2" SmallChange="0.1" 
+                                                            Style="{DynamicResource FlatSlider}" TickPlacement="BottomRight">
+                                                </Slider>
+                                                <TextBlock Width="28" FontSize="14"  Margin="52,10,8,10" Text="{Binding ElementName=XSlider, Path=Value,Mode=TwoWay}"></TextBlock>
+                                                <Button VerticalAlignment="Top" HorizontalAlignment="Center" 
+                                                                    Padding="10"  Height="46"  Style="{DynamicResource SquareButtonStyle}"                                                            
+                                                                    Margin="70,19,0,0" Width="60" FontSize="14" Click="WrapPanel5_Close" Content="关闭"/>
+                                            </WrapPanel>
+                                        </StackPanel>
+                                    </ScrollViewer>
+                                    <StackPanel  Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Orientation="Horizontal" Background="#FF9E9898" >
+                                        <Label x:Name="label_Position" VerticalContentAlignment="Center" FontSize="20" HorizontalAlignment="Left" 
+                                               Margin="0,0,0,5" Width="210" Height="40" >
+                                            <Label.BitmapEffect>
+                                                <DropShadowBitmapEffect Direction="315" ShadowDepth="5" Softness="0.2" Opacity=".7" Color="White" />
+                                            </Label.BitmapEffect>
+                                        </Label>
+                                        <Label x:Name="label_Position_Copy" Content="x:0 y:0" VerticalContentAlignment="Center" FontSize="20" 
+                                               HorizontalAlignment="Left" Width="210" Height="40">
+                                            <Label.BitmapEffect>
+                                                <DropShadowBitmapEffect Direction="315" ShadowDepth="5" Softness="0.2" Opacity=".7" Color="White" />
+                                            </Label.BitmapEffect>
+                                        </Label>
+										<ProgressBar x:Name="pBStatus" Visibility="Collapsed"/>
+										<Label x:Name="Status" Visibility="Collapsed"/>
+									</StackPanel>						                                
+									<Canvas Name="ToolTipCanvas">
+										<Label Name="ImageToolTip" Height="40" BorderThickness="5" Visibility="Collapsed"  Opacity="0.5" Background="Yellow">
+										</Label>
+									</Canvas>
+								</Grid>
+							</avalonDock:LayoutAnchorable>
+						</avalonDock:LayoutAnchorGroup>
+					</avalonDock:LayoutAnchorSide>
+				</avalonDock:LayoutRoot.BottomSide>
+			</avalonDock:LayoutRoot>
+		</avalonDock:DockingManager>
+        <Button HorizontalAlignment="Right" Style="{DynamicResource MetroCircleButtonStyle}"
+						Margin="37,-1,65,0" VerticalAlignment="Top"  Click="Image_Save_Click"
+						Width="30" Height="30" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <Rectangle Width="20"
+              Height="20">
+                <Rectangle.Fill>
+                    <VisualBrush Stretch="Fill"
+                    Visual="{StaticResource appbar_image_export}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </Button>
+        <Button HorizontalAlignment="Right" Style="{DynamicResource MetroCircleButtonStyle}"
+						Margin="37,-1,30,0" VerticalAlignment="Top"  Click="Progress_Fluout1_Click"
+						Width="30" Height="30" RenderTransformOrigin="0.5,0.5" Grid.Row="1">
+            <Rectangle Width="20"
+              Height="20">
+                <Rectangle.Fill>
+                    <VisualBrush Stretch="Fill"
+                    Visual="{StaticResource appbar_list_check}" />
+                </Rectangle.Fill>
+            </Rectangle>
+        </Button>
+        <Controls:Flyout x:Name="Progress_Fluout1" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" 
+							 Width="229" Background="#FFDECECE" Position="Right"  IsOpen="False"  Opacity="0.95">
+			<Grid  Width="Auto" Height="Auto"  Margin="0,0,0,0">
+				<Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15"/>
+					<ColumnDefinition Width="50"/>
+					<ColumnDefinition Width="15"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+                    <RowDefinition Height="46"/>
+				</Grid.RowDefinitions>
+                <Ellipse Grid.Column="1" Grid.Row="0" x:Name="Checkbox_record" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="0" Margin="0,6,0,6" Content="系统参数配置"/>
+                <Ellipse Grid.Column="1" Grid.Row="1" x:Name="Checkbox_set_install_height" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label  Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="1" Margin="0,6,0,6" Content="安装高度设置"/>
+                <Ellipse Grid.Column="1" Grid.Row="11" x:Name="Checkbox_connect_plane" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="11" Margin="0,6,0,6" Content="    关联机型"/>
+                <Ellipse Grid.Column="1" Grid.Row="2" x:Name="Checkbox_AutoCalibration" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="2" Margin="0,6,0,6" Content="    水平标定"/>
+                <Ellipse Grid.Column="1" Grid.Row="3" x:Name="Checkbox_VerticalCalibration" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="3" Margin="0,6,0,6" Content="    垂直标定"/>
+                <Ellipse Grid.Column="1" Grid.Row="6" x:Name="Checkbox_CaptureAreaSet" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="6" Margin="0,6,0,6" Content="捕获区域设置"/>
+                <Ellipse Grid.Column="1" Grid.Row="7" x:Name="Checkbox_TrackingAreaSet" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="7" Margin="0,6,0,6" Content="跟踪区域设置"/>
+                <Ellipse Grid.Column="1" Grid.Row="8" x:Name="Checkbox_BoardingBridgeSet" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="8" Margin="0,6,0,6" Content="登机桥区域设置"/>
+                <Ellipse Grid.Column="1" Grid.Row="4" x:Name="Checkbox_ConfirmRect" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="4" Margin="0,6,0,6" Content="确认校准边框"/>
+                <Ellipse Grid.Column="1" Grid.Row="5" x:Name="Checkbox_LaserGuidelineSet" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="5" Margin="0,6,0,6" Content="激光引导线设置"/>
+                <Ellipse Grid.Column="1" Grid.Row="9" x:Name="Checkbox_GuidelineSet" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="9" Margin="0,6,0,6" Content="视觉引导线设置"/>
+                <Ellipse Grid.Column="1" Grid.Row="10" x:Name="Checkbox_VisualDis" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="10" Margin="0,6,0,6" Content="视觉距离标定"/>
+                <Ellipse Grid.Column="1" Grid.Row="12" x:Name="Checkbox_Problem" Margin="7"  Stroke="Black" StrokeThickness="1">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush
+                               RadiusX="1" RadiusY="1" >
+                            <GradientStop Color="White" Offset="0" />
+                            <GradientStop Color="Red" Offset="1" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Foreground="Black" FontSize="21" Grid.Column="3" Grid.Row="12" Margin="0,6,0,6" Content="    问题提示"/>
+			</Grid>
+		</Controls:Flyout>
+        
+        <local:about Width="454" Height="364" x:Name="aboutControl" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden"  CloseButtonClick="about_CloseButtonClick" />
+	</Grid>
+	<Controls:MetroWindow.Flyouts>
+		<Controls:FlyoutsControl>
+		</Controls:FlyoutsControl>
+	</Controls:MetroWindow.Flyouts>
+</Controls:MetroWindow>

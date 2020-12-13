@@ -1,0 +1,491 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:VIDGS配置软件"
+        xmlns:cm="clr-namespace:System.ComponentModel;assembly=System"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:ec="http://schemas.microsoft.com/expression/2010/controls" 
+        x:Class="VIDGS配置软件.SetParameter"
+        xmlns:localThemes="clr-namespace:VIDGS配置软件"
+        xmlns:shell="clr-namespace:Microsoft.Windows.Shell;assembly=Xceed.Wpf.AvalonDock"
+        xmlns:avalonDock="http://schemas.xceed.com/wpf/xaml/avalondock"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        Loaded="SetParameter_Loaded" ResizeMode="CanMinimize" AllowDrop="True"
+        SizeToContent="WidthAndHeight" WindowTransitionsEnabled="False"
+        Title="激光设置" Height="748" Width="1024">
+    <Controls:MetroWindow.Resources>
+        <local:GNumArr x:Key="GuideNum"/>
+        <local:SNumArr x:Key="StopNum"/>
+        <cm:BackgroundWorker x:Key="backgroundWorker"
+          WorkerReportsProgress="True" WorkerSupportsCancellation="True"
+          DoWork="backgroundWorker_DoWork" ProgressChanged="backgroundWorker_ProgressChanged" 
+          RunWorkerCompleted="backgroundWorker_RunWorkerCompleted"/>
+    </Controls:MetroWindow.Resources>
+    <Border  Margin="0,0,0,0"  BorderBrush="#395984" CornerRadius="20,20,20,20" Width="1018" Height="715" >
+        <Border.Background>
+            <LinearGradientBrush >
+                <GradientBrush.GradientStops>
+                    <GradientStopCollection>
+                        <GradientStop Color="#A7A9B0" Offset="0.0"/>
+                        <GradientStop Color="#323A52"  Offset="1.0"/>
+                    </GradientStopCollection>
+                </GradientBrush.GradientStops>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="356"/>
+                <ColumnDefinition Width="284"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.4*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2.5*"/>
+            </Grid.RowDefinitions>
+            <Grid Margin="5,-2,10,0" Grid.Row="0" Grid.RowSpan="2" Background="#FFB8A5A5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="70"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="0.1*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="Block1" TextWrapping="Wrap"  FontSize="21" 
+                           Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Visible" Margin="-10,10,10,5" Grid.RowSpan="2"/>
+                <TextBlock x:Name="Block2"  TextWrapping="Wrap"  FontSize="18" 
+                           Grid.Row="3" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="2" Visibility="Visible"/>
+            </Grid>
+            <Grid Grid.Column="1" Grid.RowSpan="3"  Margin="0,0,7,10" Background="#FF898484">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="39"/>
+                    <RowDefinition Height="58"/>
+                    <RowDefinition Height="48"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="10"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <GroupBox x:Name="Group2d" Grid.Row="0" Grid.ColumnSpan="2" Margin="6,0,6,0"
+                                                      BorderBrush="{x:Null}" Background="{x:Null}" FontFamily="微软雅黑">
+                    <Border  x:Name="border2d" Width="322" Height ="466" Margin="0,-14,0,0" ClipToBounds="True">
+                        <Image x:Name="Image2dBox"  Width="322" Height ="466" Margin="0,-14,0,0" RenderTransformOrigin="0.5,0.5"
+                                                           Cursor="Hand" MouseWheel="Image2dBox_MouseWheel"  MouseMove="Image2dBox_MouseMove" 
+                                                           ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Visible"
+                                                           MouseLeftButtonDown="Image2dBox_MouseLeftButtonDown" MouseLeftButtonUp="Image2dBox_MouseLeftButtonUp"       
+                                                           MouseRightButtonDown="Image2dBox_MouseRightButtonDown" MouseRightButtonUp="Image2dBox_MouseRightButtonUp"
+                                                           ImageFailed="Image2dBox_ImageFailed"/>
+                    </Border>
+                </GroupBox>
+                <Label Grid.Row="2" Grid.Column="0" FontSize="18" Margin="40,0,0,0">
+                    X轴缩放开
+                </Label>
+                <Controls:ToggleSwitchButton x:Name="Xaxiszoom"  Width="100" 
+											   Grid.Row="2" Grid.Column="0" IsChecked="True"  Margin="40,25,30,0"/>
+                <Controls:ToggleSwitch x:Name="Yaxiszoom" Header="{DynamicResource Yaxiszoom48}" Width="120"
+											   Grid.Row="2" Grid.Column="1" IsChecked="True" ContentDirection="RightToLeft" OffLabel="关" OnLabel="开"/>
+                <Label x:Name="labelPosition" Grid.Row="1" Grid.ColumnSpan="2" Content="x:0 y:0" 
+                                                   VerticalContentAlignment="Center" FontSize="14" HorizontalAlignment="Center" 
+                                                   Margin="-10,-20,1,1" Width="169" Height="37" />
+                <Button x:Name="button_Clc" Grid.Row="1" Grid.Column="1"  FontSize="21"
+                        Height="auto" Width="auto"  Click="button_Clc_Click" 
+                        Margin="84,-20,7,10" Content="{DynamicResource Clc49}"/>
+                <Button x:Name="button_Save" Click="button_Save_Click"  Grid.Row="3" Width="90"  FontSize="21"
+                        Margin="22,0,14,-20" Content="{DynamicResource Save50}" Height="45" Padding="7,3,10,3"/>
+                <Button x:Name="button_Esc" Grid.Row="3" Grid.Column="1" Width="90"  Click="button_Esc_Click"  FontSize="21"
+                                                    Margin="21,25,29,-20" Content="{DynamicResource Esc51}" Height="45" Padding="3,7,10,3"/>
+            </Grid>
+            <Grid  Grid.Row="2" Grid.Column="0"  Margin="2,-20,8,7">
+                <Grid.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                        <GradientStop Color="#FFAEAEAE" Offset="1"/>
+                        <GradientStop Color="#FF6A7675" Offset="0.384"/>
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <!-- Your custom content here -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Controls:NumericUpDown x:Name="XNumericUpDown" Minimum="1"  Maximum="50" Value="1" Interval="1"  
+															Grid.Row="3"  Margin="48,82,48,61" 
+															Height="34" Width="72"/>
+                <Button x:Name="button_2dScan0" Grid.Row="1"  Margin="-45,-20,102,25"   Click="button_2dScan_Click" 
+								Grid.RowSpan="2" Height="45" Width="110" FontSize="21">
+                    <StackPanel Height="auto" Width="auto">
+                        <TextBlock Text="{DynamicResource 2dscan_dis26}" TextWrapping="WrapWithOverflow"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="button_Back0" Grid.Row="3" 
+                          FontSize="21"                           Margin="130,-58,-24,180"  Click="button_Back0_Click" 
+                                                    Height="45" Width="110">
+                    <StackPanel Height="auto" Width="auto">
+                        <TextBlock x:Name="ForBack0_dis27" Text="{DynamicResource Back0_dis27}" TextWrapping="WrapWithOverflow"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="button_RoughlyBack0" Grid.Row="3" 
+                         FontSize="21"                            Margin="-45,-58,102,180"   
+                                                    Height="45" Width="110">
+                    <StackPanel Height="auto" Width="auto">
+                        <TextBlock Text="{DynamicResource RoughlyBack095}" TextWrapping="WrapWithOverflow" RenderTransformOrigin="0.5,0.5">
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform/>
+                                    <RotateTransform Angle="1.11"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="button_Set0" Grid.Row="1" Margin="130,-20,-24,25" Click="button_Set0_Click"  FontSize="21"
+						Content="{DynamicResource Set0_dis28}" Grid.RowSpan="2" Height="45" Width="110" Padding="10,5"/>
+                <ec:PathListBox Margin="39,80.25,31,74" Grid.Row="3">
+                    <ec:PathListBox.LayoutPaths>
+                        <ec:LayoutPath SourceElement="{Binding ElementName=ellipse}" Distribution="Even"/>
+                    </ec:PathListBox.LayoutPaths>
+                    <Button x:Name="button_RightMove" Style="{DynamicResource MetroCircleButtonStyle}"
+                                                        Height="58"
+                                                        Width="58"    ToolTip="{DynamicResource Shift laser scanning area to the right84}"
+                                                        VerticalAlignment="Top">
+                        <Rectangle Width="20"
+                                                               Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_arrow_right}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button  x:Name="button_DownMove" Style="{DynamicResource MetroCircleButtonStyle}"
+                                                         Height="58" 
+                                                         Width="58"    ToolTip="{DynamicResource Move down laser scanning area85}"
+                                                         VerticalAlignment="Top" >
+                        <Rectangle Width="20"
+                                                               Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_arrow_down}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button  x:Name="button_LeftMove"  Style="{DynamicResource MetroCircleButtonStyle}"
+                                                         Height="58" 
+                                                         Width="58"    ToolTip="{DynamicResource Shift laser scanning area to the left86}"
+                                                         VerticalAlignment="Top" Background="{x:Null}">
+                        <Rectangle Width="20"
+										Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_arrow_left}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                    <Button x:Name="button_UpMove"  Style="{DynamicResource MetroCircleButtonStyle}"
+                                                        Height="58"
+                            
+                                                        Width="58"   ToolTip="{DynamicResource Move up laser scanning area87}"
+                                                        VerticalAlignment="Top">
+                        <Rectangle Width="20"
+										Height="20">
+                            <Rectangle.Fill>
+                                <VisualBrush Stretch="Fill"
+												Visual="{StaticResource appbar_arrow_up}" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Button>
+                </ec:PathListBox>
+                <Ellipse x:Name="ellipse" HorizontalAlignment="Stretch"  Height="130" 
+											 Margin="0,90,0,0" Grid.Row="3" VerticalAlignment="Top" Width="130"/>
+            </Grid>
+            <Controls:MetroTabControl x:Name="SetTabControl"  Grid.Column="2" Grid.Row="1" Grid.RowSpan="2" Background="#FF898484">
+                <Controls:MetroTabItem x:Name="Tab1" Header="{DynamicResource Calibration74}" Visibility="Visible" Margin="15,0,0,0" Width="84">
+                    <Grid Margin="5,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="98"/>
+                        </Grid.RowDefinitions>
+                        <Controls:ToggleSwitchButton Height="80" Width="100" Grid.Row="3" IsChecked="True"/>
+                        <Button x:Name="button_ConfirmRect" Grid.Row="5" Margin="30,10"
+													Click="button_ConfirmRect_Click" Grid.ColumnSpan="2" >
+                            <StackPanel Height="auto" Width="auto" HorizontalAlignment="Center" >
+                                <TextBlock x:Name="ForConfirmRect31" FontSize="24" Text="{DynamicResource ConfirmRect31}" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="button_AutoCalibration" Grid.Row="1" 
+								Click="button_AutoCalibration_Click" Margin="30,10" >
+                            <StackPanel Height="auto" Width="auto" HorizontalAlignment="Center" >
+                                <TextBlock x:Name="ForAutoCalibration29" FontSize="24" Text="{DynamicResource AutoCalibration29}" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="button_VerticalCalibration" Grid.Row="2" Margin="30,10" 
+													Click="button_VerticalCalibration_Click" >
+                            <StackPanel Height="auto" Width="auto" HorizontalAlignment="Center" >
+                                <TextBlock x:Name="ForVerticalCalibration30"  FontSize="24"  Text="{DynamicResource VerticalCalibration30}" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                        </Button>
+
+                    </Grid>
+                </Controls:MetroTabItem>
+                <Controls:MetroTabItem x:Name="Tab2" Header="{DynamicResource Guideline6}" Visibility="Visible" Margin="13,0,0,0" Width="100" >
+                    <Grid Margin="5,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="45"/>
+                            <RowDefinition Height="65"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="60"/>
+                            <RowDefinition Height="50"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="button_WalkSet" Grid.Row="0" 
+													            Grid.Column="0" Grid.ColumnSpan="3" 
+													            Margin="15,10,25,10" Click="button_WalkSet_Click" 
+													            Content="{DynamicResource WalkSet32}" FontSize="21"/>
+                        <Button x:Name="button_WalkTest" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"  ToolTip="{DynamicResource Start Walk settings88}"
+													            Margin="15,10,25,10" Click="button_WalkTest_Click"
+													            Content="{DynamicResource WalkTest33}" FontSize="21"/>
+                        <Button x:Name="button_WalkStop" Grid.Row="0"
+													            Grid.Column="3"  Margin="-13,10,16,10" Click="button_WalkStop_Click" 
+													            Content="{DynamicResource WalkStop34}" FontSize="21"/>
+                        <Button x:Name="button_WalkConfirm" Grid.Row="1"  ToolTip="{DynamicResource Confirm walk settings89}"
+													            Grid.Column="3" Margin="-13,10,16,10" Click="button_WalkConfirm_Click"
+													            Content="{DynamicResource WalkConfirm35}" FontSize="21"/>
+                        <Button x:Name="button_WalkDelete" Grid.Row="2"   FontSize="21"
+													            Grid.Column="3" Margin="-13,10,16,10" Click="button_WalkDelete_Click" 
+													            Content="{DynamicResource WalkDelete36}" RenderTransformOrigin="0.5,-0.108" />
+                        <Button x:Name="button_WalkNum" Grid.Row="2"  ToolTip="{DynamicResource Number the Guide line generated by walk settings90}"
+													            Grid.Column="0" Grid.ColumnSpan="3" 
+													            Margin="15,10,25,10" Click="button_WalkNum_Click" 
+													            Content="{DynamicResource WalkNum37}"  FontSize="21"/>
+                        <Label  x:Name="Fordependcystopline" Grid.Row="3" Grid.ColumnSpan="2" 
+												                Content="{DynamicResource Stopline7}" 
+												                Height="50" Width="90" FontSize="21" Margin="17,0,0,0"/>
+                        <TextBox Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="18" x:Name="Stop_Y" Margin="30,0,16,0" Height="38" TextChanged="Install_height_TextChanged" KeyDown="Install_height_KeyDown"/>
+                        <ComboBox  Grid.Row="5" Grid.Column="0" SelectedIndex="0" Grid.ColumnSpan="2" Height="38" x:Name="drpModel" Margin="10,0,5,0"/>
+                        <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="18" x:Name="Number_GuideLine" Height="38"  Margin="10,0,5,0"/>
+                        <Button x:Name="button_ModelGuide" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" ToolTip="{DynamicResource Input Plane Type91}"
+													            Height="auto" Width="auto" Margin="5,10" Click="button_ModelGuide_Click" FontSize="18"                                                     >
+                            <StackPanel Height="auto" Width="auto">
+                                <TextBlock Text="{DynamicResource ModelGuide38}" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="button_NumberGuide" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="2"  ToolTip="{DynamicResource Input Line Number92}"
+													            Height="auto" Width="auto" Margin="5,10" Click="button_NumberGuide_Click" FontSize="18" >
+                            <StackPanel Height="auto" Width="auto">
+                                <TextBlock Text="{DynamicResource NumberGuid39}" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="button_TestConfirmPoint" Width="auto" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"  Margin="38.561,10,38,10" 
+									FontSize="21"				            Click="button_TestConfirmPoint_Click">
+                            <StackPanel Height="auto" Width="auto">
+                                <TextBlock Text="{DynamicResource TestConfirmPoint40}" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+                </Controls:MetroTabItem>
+                <Controls:MetroTabItem x:Name="Tab3" Header="{DynamicResource Master mod73}" Visibility="Visible" Margin="16,10,-16,-10" Width="84">
+                    <Grid  Grid.Row="1" Grid.RowSpan="2" Margin="10,6,17,6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="34*"/>
+                            <ColumnDefinition Width="94*"/>
+                            <ColumnDefinition Width="129*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="button_ReadRect" Grid.Row="1" 
+                                  FontSize="21"   Grid.Column="0" Grid.ColumnSpan="3" Margin="30,5" Click="button_ReadRect_Click"
+                                   Content="{DynamicResource ReadRect42}"/>
+                        <Button x:Name="button_Proof" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Margin="30,5" Click="button_Proof_Click"
+                                  FontSize="21"  Content="{DynamicResource Proof41}"/>
+                        <Button x:Name="button_PointMeasure" Grid.Row="4" Grid.Column="0" 
+                                                                Margin="14,5,3,5" Click="button_PointMeasure_Click" FontSize="14" Grid.ColumnSpan="2">
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <TextBlock Text="{DynamicResource mid_num43}" TextWrapping="WrapWithOverflow"/>
+                            </StackPanel>
+                        </Button>
+                        <Label x:Name="mid_num" Grid.Row="4" Grid.Column="2" Content="0" Margin="20,5,10,5"  FontSize="18"/>
+                        <Button x:Name="button_OpenRed" Grid.Row="5" Grid.Column="0" 
+                                                                Margin="14,5,3,5" Click="button_OpenRed_Click" Grid.ColumnSpan="2">
+                            <StackPanel Width="auto" Height="auto">
+                                <TextBlock Text="{DynamicResource OpenRed44}" TextWrapping="WrapWithOverflow" FontSize="15"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="button_CloseRed" Grid.Row="5" Grid.Column="2" Click="button_CloseRed_Click"  
+                                                                Margin="18,5,0,4">
+                            <StackPanel Width="auto" Height="auto">
+                                <TextBlock Text="{DynamicResource CloseRed45}" TextWrapping="WrapWithOverflow" FontSize="15"/>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="button_WindowScan" Grid.Row="3"  FontSize="21"
+                                                                Grid.Column="0" Grid.ColumnSpan="3" 
+                                                                Margin="30,5" Click="button_WindowScan_Click"
+                                                                Content="{DynamicResource WindowScan46}" />
+                        <Button x:Name="button_GuideLineMove" Grid.Row="6" Grid.Column="0" Click="button_GuideLineMove_Click" Margin="14,5,118,5"
+                                                                ToolTip="{DynamicResource Input num to shift Guide line93}" Grid.ColumnSpan="3">
+                            <StackPanel Width="auto" Height="auto">
+                                <TextBlock Text="{DynamicResource Guidelinemove71}" TextWrapping="WrapWithOverflow" FontSize="21"/>
+                            </StackPanel>
+                        </Button>
+                        <TextBox Grid.Row="6" Grid.Column="2" Width="99" Height="38" Margin="30,9,0,9" x:Name="TextBox_GuideLineMove" />
+                        <Button x:Name="button_StopLineMove" Grid.Row="7" Grid.Column="0" Click="button_StopLineMove_Click" Margin="14,5,118,5" 
+                                                                ToolTip="{DynamicResource Input num to shift Stop line94}" Grid.ColumnSpan="3">
+                            <StackPanel Width="auto" Height="auto">
+                                <TextBlock Text="{DynamicResource stoplinemove72}" TextWrapping="WrapWithOverflow" FontSize="21"/>
+                            </StackPanel>
+                        </Button>
+                        <TextBox Grid.Row="7" Grid.Column="2" Width="100" Height="38" Margin="30,9,-1,9" x:Name="TextBox_StopLineMove"/>
+                    </Grid>
+                </Controls:MetroTabItem>
+                <Controls:MetroTabItem x:Name="Tab4" Header="{DynamicResource WalkNum37}" Visibility="Collapsed">
+                    <Border Width="243" Height="Auto"
+                                                            BorderThickness="1"
+                                                            CornerRadius="20,20,20,20" >
+                        <Grid Width="241">
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="FontSize" Value="16"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="1.5*"/>
+                                <RowDefinition Height="80"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="{DynamicResource guideline68}" />
+                            <TextBlock Text="{DynamicResource stopline69}" Grid.Row="2" Grid.Column="0"/>
+                            <TextBlock Grid.Row="3" Text="{DynamicResource distance52}"/>
+                            <TextBox x:Name="drpdistance" Grid.Row="3" Grid.Column="1" Margin="0,0,25,0" 
+                                                                     Controls:TextBoxHelper.ClearTextButton="True"   
+                                                                     KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged"/>
+                            <ComboBox x:Name="drpGuide" Grid.Row="1" Grid.Column="1" Height="30" Margin="0,0,25,0" ItemsSource="{StaticResource GuideNum}"
+                                                                  DisplayMemberPath="Guide" SelectedValuePath="Guide" SelectedIndex="0"/>
+                            <ComboBox x:Name="drpStop" Grid.Row="2" Grid.Column="1" Height="30" Margin="0,0,25,0" ItemsSource="{StaticResource StopNum}" 
+                                                                  DisplayMemberPath="Stop" SelectedValuePath="Stop" SelectedIndex="0"/>
+
+                            <Grid Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{DynamicResource guideline68}" HorizontalAlignment="Left" Width="64" />
+                                <TextBlock Grid.Column="1" Width="60"
+                                                                       Text="{Binding ElementName=drpGuide,Path=SelectedValue}"/>
+
+                                <TextBlock Grid.Row="1" Text="{DynamicResource stopline69}"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="NumStop" Width="60"
+                                                                       Text="{Binding ElementName=drpStop,Path=SelectedValue}"/>
+                                <TextBlock Text="{DynamicResource C123}" Grid.Row="2" HorizontalAlignment="Left" Width="64" />
+                                <TextBlock Grid.Row="2" Grid.Column="1" Width="60" Text="{Binding ElementName=drpdistance,Path=Text}"/>
+                                <TextBlock Grid.Row="2" Grid.Column="2" Text="mm"/>
+                            </Grid>
+                            <Grid Grid.Row="4" VerticalAlignment="Center" Grid.ColumnSpan="2" HorizontalAlignment="Center"></Grid>
+                            <Button VerticalAlignment="Top" HorizontalAlignment="Center"
+                                                                    Padding="10"  Height="46" Margin="-40,0,121,0" Width="65" 
+                                                                    FontSize="14" Grid.Column="1" Grid.Row="5"  Content="{DynamicResource C130}"/>
+                            <Button VerticalAlignment="Top" HorizontalAlignment="Center" Padding="10"  
+                                                                    Height="46" Margin="68,0,35,0" Width="65" FontSize="14" 
+                                                                    Grid.Column="1" Grid.Row="5" Content="{DynamicResource C131}"/>
+                        </Grid>
+                    </Border>
+                </Controls:MetroTabItem>
+            </Controls:MetroTabControl>
+            <Grid Grid.Row="0" Grid.Column="2"  Background="#FF898484">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="40"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.4*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="1" Grid.Column="0" FontSize="18" Margin="0,6,0,0" 
+							Text="{DynamicResource install_high22}" TextWrapping="Wrap"/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="Install_height" 
+						Controls:TextBoxHelper.ClearTextButton="True"  FontSize="18"
+						KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" FontSize="18" Margin="0,6,0,0" 
+						Text="{DynamicResource object_high23}" TextWrapping="Wrap"/>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="Object_height" 
+						 FontSize="18"		                     Controls:TextBoxHelper.ClearTextButton="True"   
+								                     KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" FontSize="19" Margin="0,6,0,0" 
+							                           Text="{DynamicResource object_dis24}" TextWrapping="Wrap"/>
+                <TextBox Grid.Row="5" Grid.Column="1" x:Name="Object_distance" 
+							 FontSize="18"	                     Controls:TextBoxHelper.ClearTextButton="True"  
+								                     KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged" />
+                <TextBlock Grid.Row="7" Grid.Column="0" FontSize="18" Margin="0,6,0,0" 
+							                           Text="{DynamicResource Edit_StandHigh25}" TextWrapping="Wrap"/>
+                <TextBox Grid.Row="7" Grid.Column="1" x:Name="edit_StandHigh" 
+							 FontSize="18"	                     Controls:TextBoxHelper.ClearTextButton="True"  
+								                     KeyDown="Install_height_KeyDown" TextChanged="Install_height_TextChanged"/>
+            </Grid>
+            <Path Grid.Column="1" Data="M891.5,384" Fill="#FFF4F4F5" HorizontalAlignment="Left" 
+                                              Height="1" Margin="439.326,4.833,-92.5,0" Grid.Row="2" Stretch="Fill" Stroke="Black" 
+                                              VerticalAlignment="Top" Width="1"/>
+        </Grid>
+    </Border>
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
+    <!--<i:Interaction.Behaviors>
+        <Behaviours:BorderlessWindowBehavior />
+    </i:Interaction.Behaviors>-->
+</Controls:MetroWindow>
